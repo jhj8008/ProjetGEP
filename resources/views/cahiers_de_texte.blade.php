@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Les cahiers de texte de chaque enseignant</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="title">
+            <h1>Les cahiers de texte de chaque enseignant</h1>
+        </div>
+    </div>
+</div>
 @endsection

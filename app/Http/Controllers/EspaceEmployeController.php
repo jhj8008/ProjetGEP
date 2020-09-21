@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ActivitésController extends Controller
+class EspaceEmployeController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -13,7 +13,7 @@ class ActivitésController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('guest');
+        $this->middleware('employe');
     }
 
     /**
@@ -23,6 +23,6 @@ class ActivitésController extends Controller
      */
     public function index()
     {
-        return view('activités');
+        return view('Auth\employe\espace_employe');
     }
 }

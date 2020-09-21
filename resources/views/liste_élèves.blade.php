@@ -68,12 +68,12 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="title">Liste des élèves de l'école</h1>
+        <h1 class="title">Liste des élèves</h1>
         <div class="container mb-3 mt-3">
             <table id="liste_élèves" class="table table-striped table-bordered dt-responsive nowrap hover" cellspacing="0" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>Niveau</th>
                         <th>Nom élève</th>
                         <th>Profile</th>
                     </tr>
@@ -81,7 +81,7 @@
                 <tbody>
                     @foreach($élèves as $élève)
                         <tr>
-                            <td>{{ $élève->id }}</td>
+                            <td><strong style="color:#557A95;">{{ $élève->niveau_scolaire }}</strong></td>
                             <td>{{ $élève->nom }}, {{ $élève->prénom }}</td>
                             <td>
                                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="{{'#exampleModalScrollable'.$élève->id}}">
@@ -142,7 +142,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Id</th>
+                        <th>Niveau</th>
                         <th>Nom élève</th>
                         <th>Profile</th>
                     </tr>

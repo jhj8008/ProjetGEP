@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Closure;
 
-class AdminMiddleware
+class EnseignantMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,14 +16,6 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        /*if(auth()->guest()){
-            return redirect('/');
-        }
-
-        if(!auth()->user()->admin){
-            return redirect('/');
-        }*/
-
         if(!Auth::guard('employe')->check()){
             return redirect('/');
         }

@@ -46,6 +46,10 @@ return [
             'provider' => 'parents',
             'hash' => false,
         ],
+        'employe' => [
+            'driver' => 'session',
+            'provider' => 'employes',
+        ],
     ],
 
     /*
@@ -74,6 +78,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Elèveparent::class,
             'table' => 'elèveparents',
+        ],
+        'employes' => [
+            'driver' => 'eloquent',
+            'model' => App\Employe::class,
+            'table' => 'employes',
         ],
         // 'users' => [
         //     'driver' => 'database',
@@ -109,6 +118,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'employes' => [
+            'provider' => 'employes',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ]
     ],
 
     /*

@@ -62,6 +62,7 @@
         }
 
         .my_footer{
+            position:absolute;
             display: grid;
             place-items: center;
             flex: 1;
@@ -140,7 +141,7 @@
                             <a class="nav-link" href="{{ route('parents.forum') }}">{{ __('Forum') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('parents.espace_élève') }}">{{ __('Espace élève') }}</a>
+                            <a class="nav-link" href="{{ route('employés.espace_employe') }}">{{ __('Espace employé') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('clients.actualités') }}">{{ __('Actualités') }}</a>
@@ -151,10 +152,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('parents.notifications') }}">{{ __('Notifications') }}</a>
                         </li>
-
-                        @if (!Auth::guard('employe')->check() and !Auth::check())
+                        @guest('employe')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('employés.loginEmploye') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
@@ -164,12 +164,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle username" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    @if(isset(Auth::guard('employe')->user()->nom))
-                                        {{ Auth::guard('employe')->user()->nom }} 
-                                    @else
-                                        {{ Auth::user()->nom_père }} 
-                                    @endif
-                                    <span class="caret"></span>
+                                    {{ Auth::guard('employe')->user()->nom }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -184,7 +179,7 @@
                                     </form>
                                 </div>
                             </li>
-                        @endif
+                        @endguest
                     </ul>
                 </div>
             </div>

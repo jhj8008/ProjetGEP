@@ -103,7 +103,7 @@
                             @error('duplicate_error')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                        <form method="POST" action="{{ route('inscription') }}" id="payment-form">
+                        <form method="POST" action="{{ route('parents.inscription') }}" id="payment-form">
                             @csrf
                             <div class="form-group">
 

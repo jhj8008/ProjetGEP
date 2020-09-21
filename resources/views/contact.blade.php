@@ -36,7 +36,7 @@
                             <strong>{{ $message }}</strong>
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('contacter') }}">
+                    <form method="POST" action="{{ route('clients.contacter') }}">
                         @csrf
 
                         <div class="form-group row">

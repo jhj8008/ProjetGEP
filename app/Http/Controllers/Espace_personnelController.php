@@ -13,7 +13,7 @@ class Espace_personnelController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('employe');
     }
 
     /**
@@ -23,6 +23,6 @@ class Espace_personnelController extends Controller
      */
     public function index()
     {
-        return view('espace_personnel');
+        return view('Auth\employe\personnel\espace_personnel');
     }
 }

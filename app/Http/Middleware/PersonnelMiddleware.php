@@ -2,10 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Support\Facades\Auth;
 use Closure;
 
-class AdminMiddleware
+class PersonnelMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,19 +15,12 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        /*if(auth()->guest()){
-            return redirect('/');
-        }
-
-        if(!auth()->user()->admin){
-            return redirect('/');
-        }*/
 
         if(!Auth::guard('employe')->check()){
             return redirect('/');
         }
 
-        if(Auth::guard('employe')->check() && !Auth::guard('employe')->user()->admin){
+        if(Auth::guard('employe')->check() && !Auth::guard('employe')->user()->personnel){
             return redirect('espace_employe');
         }
         return $next($request);

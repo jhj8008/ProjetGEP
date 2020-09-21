@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito|Monoton|Raleway|Quicksand:200,600" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Styles -->
+        <link rel="icon" href="{{ URL::asset('imgs/school.png') }}" type="image/x-icon"/>
         <style>
             html, body {
                 scroll-behavior: smooth;
@@ -114,7 +115,7 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    @auth
+                    @if(Auth::guard('employe')->check() or Auth::check())
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
@@ -132,16 +133,16 @@
                 </div>
 
                 <div class="links">
-                    <a href="{{ route('forum') }}">Forum</a>
-                    <a href="{{ route('espace_élève') }}">Espace élève</a>
-                    <a href="{{ route('actualités') }}">Actualités</a>
-                    <a href="{{ route('absences_retards') }}">Absences & Retards</a>
-                    <a href="{{ route('notes') }}">Notes</a>
-                    <a href="{{ route('activités') }}">Activités</a>
-                    <a href="{{ route('notifications') }}">Notifications</a>
-                    <a href="{{ route('espace_personnel') }}">Espace personnel</a>
-                    <a href="{{ route('à_propos') }}">À propos</a>
-                    <a href="{{ route('contact') }}">Contact</a>
+                    <a href="{{ route('parents.forum') }}">Forum</a>
+                    <a href="{{ route('parents.espace_élève') }}">Espace élève</a>
+                    <a href="{{ route('clients.actualités') }}">Actualités</a>
+                    <a href="{{ route('parents.absences_retards') }}">Absences & Retards</a>
+                    <a href="{{ route('parents.notes') }}">Notes</a>
+                    <a href="{{ route('clients.activités') }}">Activités</a>
+                    <a href="{{ route('parents.notifications') }}">Notifications</a>
+                    <a href="{{ route('employés.espace_employe') }}">Espace employé</a>
+                    <a href="{{ route('clients.à_propos') }}">À propos</a>
+                    <a href="{{ route('clients.contact') }}">Contact</a>
                 </div>
                 <div class="d-flex justify-content-center" style="width:80%;margin-top:5%;margin-left:10%;margin-right:10%">
                     <h3 class="display-4">Mot du directeur</h3>
