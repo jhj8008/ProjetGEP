@@ -31,9 +31,13 @@ class RedirectIfAuthenticated
                     return $next($request);
                 }
         }*/
-        /*if (Auth::guard($guard)->check()) {
+        if (Auth::guard('employe')->check()) {
+            return redirect('/');
+        }
+
+        if(auth()->check()){
             return redirect(RouteServiceProvider::HOME);
-        }*/
+        }
 
         return $next($request);
     }

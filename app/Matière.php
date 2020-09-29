@@ -3,20 +3,24 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Matière extends Model
 {
-    protected $nom;
-    protected $description;
-    protected $coefficient;
-    protected $nbr_heures;
+    use Notifiable;
 
-    public function __construct($n, $desc, $coeff, $nh){
-        $this->nom = $nom;
-        $this->description = $desc;
-        $this->coefficient = $coeff;
-        $this->nbr_heures = $nh;
+    protected $fillable = [
+        'nom','description','coefficient','nbr_heures',
+    ];
+
+    protected $table = 'matières';
+    public $timestamps = false;
+
+    public function employes(){
+        return $this->belongsToMany('App\Employe', 'employe_matière');
     }
 
-    // getters + setters
+    public function negligences(){
+        return $this->hasMany('App\Negligence');
+    }
 }

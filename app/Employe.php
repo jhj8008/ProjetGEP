@@ -18,4 +18,16 @@ class Employe extends Authenticatable
 
     protected $table = 'employes';
     public $timestamps = false;
+
+    public function matières(){
+        return $this->belongsToMany('App\Matière', 'employe_matière');
+    }
+
+    public function classes(){
+        return $this->belongsToMany('App\Classe', 'classe_employe');
+    }
+
+    public function negligences(){
+        return $this->hasMany('App\Negligence');
+    }
 }

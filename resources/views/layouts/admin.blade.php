@@ -12,7 +12,7 @@
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito|Monoton|Quicksand|Raleway|Roboto|Montserrat|Oswald|Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Monoton|Quicksand|Raleway|Roboto|Montserrat|Oswald|Poppins|Lato" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -26,7 +26,7 @@
             color: #636b6f;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
-            height: 100%;
+            /*height: 100%;*/
             margin: 0;
             scroll-behavior: smooth;
             overflow: auto;
@@ -62,7 +62,7 @@
         }
 
         .my_footer{
-            position:absolute;
+            /*position:absolute;*/
             display: grid;
             place-items: center;
             flex: 1;
@@ -114,6 +114,18 @@
             font-weight: bold;
             color: #05386B;
         }
+
+        .navbar-nav li:hover > ul.dropdown-menu {
+            display: block;
+        }
+        .dropdown-submenu {
+            position:relative;
+        }
+        .dropdown-submenu>.dropdown-menu {
+            top:0;
+            left:100%;
+            margin-top:-6px;
+        }
     </style>
 
 </head>
@@ -140,8 +152,26 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('parents.forum') }}">{{ __('Forum') }}</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('employés.espace_employe') }}">{{ __('Espace employé') }}</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="employéMenuLink" href="{{ route('employés.espace_employe') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ __('Espace employé') }}<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="employéMenuLink">
+                                <li><a class="dropdown-item" href="#">Espace personnels</a></li>
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item dropdown-toggle" href="{{ route('enseignants.espace_enseignant') }}"> {{ __('Espace enseignant') }} </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#"> Notes et remarques </a></li>
+                                        <li><a class="dropdown-item" href="#"> Absences et retards </a></li>
+                                        <li><a class="dropdown-item" href="#"> mise en ligne des notes </a>
+                                        <li><a class="dropdown-item" href="#"> Saisir des cahiers de texte </a></li>
+                                    </ul>
+                                </li>
+                                <li><a class="dropdown-item" href="#"> Espace admin </a></li>
+                                <li><a class="dropdown-item" href="#"> Fiche personnelle </a>
+                                <li><a class="dropdown-item" href="#"> Forum </a>
+                                <li><a class="dropdown-item" href="#"> Notifications </a>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('clients.actualités') }}">{{ __('Actualités') }}</a>

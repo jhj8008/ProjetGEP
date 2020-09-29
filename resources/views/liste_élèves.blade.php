@@ -17,9 +17,11 @@
             "pageLength": 5,
             "language": {
                 "search": "Chercher: ",
+                "emptyTable": "Aucun résultat",
                 "searchPlaceholder": "Saisir un mot clé...",
-                "info": "Page _START_ de _END_ sur _TOTAL_",
+                "info": "Page _PAGE_ de _PAGES_",
                 "infoEmpty": "Page 0 de 0 sur 0",
+                "zeroRecords": "Aucun résultat trouvé",
                 "paginate": {
                     "first": "Premier",
                     "previous": "Précédent",
@@ -131,7 +133,7 @@
                                                 </dl>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                             </div>
                                         </div>
                                     </div>

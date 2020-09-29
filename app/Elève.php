@@ -11,7 +11,7 @@ class Elève extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'nom', 'prénom', 'sexe', 'date_de_naissance', 'niveau_scolaire', 'parent_id',
+        'nom', 'prénom', 'sexe', 'date_de_naissance', 'niveau_scolaire', 'parent_id', 'classe_id',
     ];
 
     protected $table = 'elèves';
@@ -20,5 +20,13 @@ class Elève extends Authenticatable
 
     public function elèveparent(){
         return $this->belongsTo('App\Elèveparent', 'parent_id');
+    }
+
+    public function classe(){
+        return $this->belongsTo('App\Classe', 'classe_id');
+    }
+
+    public function negligences(){
+        return $this->hasMany('App\Negligence');
     }
 }

@@ -20,7 +20,7 @@ class EnseignantMiddleware
             return redirect('/');
         }
 
-        if(Auth::guard('employe')->check() && !Auth::guard('employe')->user()->admin){
+        if(Auth::guard('employe')->check() && !Auth::guard('employe')->user()->enseignant){
             return redirect('espace_employe');
         }
         return $next($request);
