@@ -41,32 +41,32 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="titre">
-            <h1>Espace employé</h1>
+            <h1>Espace du personnel</h1>
         </div>
         <div class="row">
             <div class="col-sm-6 menu_item">
-                <h3>Espace de l'enseignant<i class="fa fa-graduation-cap" aria-hidden="true"></i></h3>
-                <div class="item_desc">Espace de l'enseignant<a href="#" class="btn btn-info"><span>Continuer</span></a></div>
+                <h3>Gestion des emplois du temps<i class="fa fa-calendar-check-o" aria-hidden="true"></i></h3>
+                <div class="item_desc">Gérer les emplois du temps de différentes classes<a href="#" class="btn btn-info"><span>Continuer</span></a></div>
             </div>
             <div class="col-sm-6 menu_item">
-                <h3>Espace du personnel<i class="fa fa-object-group" aria-hidden="true"></i></h3>
-                <div class="item_desc">Espace du personnel<a href="#" class="btn btn-info">Continuer</a> </div>
+                <h3>Gestion des informations des élèves<i class="fa fa-address-book-o" aria-hidden="true"></i></h3>
+                <div class="item_desc">Gérer les informations des élèves et de leurs parents<a href="{{ route('personnels.liste_élèves') }}" class="btn btn-info">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
-                <h3>Espace admin<i class="fa fa-cog" aria-hidden="true"></i></h3>
-                <div class="item_desc">Espace admin<a href="#" class="btn btn-info">Continuer</a> </div>
+                <h3>Gestion des enseignants<i class="fa fa-user-circle" aria-hidden="true"></i></h3>
+                <div class="item_desc">Gérer les informations des enseignants<a href="#" class="btn btn-info">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
-                <h3>Fiche personnelle<i class="fa fa-address-card" aria-hidden="true"></i> </h3>
-                <div class="item_desc">Fiche personnelle<a href="#" class="btn btn-info">Continuer</a> </div>
+                <h3>Gestion des fiches personnlles<i class="fa fa-address-card" aria-hidden="true"></i> </h3>
+                <div class="item_desc">Gérer votre fiche personnelle et aussi celles des enseignants<a href="{{ route('personnels.fiches_personnelles') }}" class="btn btn-info">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
-                <h3>Forum<i class="fa fa-globe" aria-hidden="true"></i></h3>
-                <div class="item_desc">Accéder aux forum des employées <a href="#" class="btn btn-info">Continuer</a> </div>
+                <h3>Gestion des classes et matières<i class="fa fa-folder-open-o" aria-hidden="true"></i></h3>
+                <div class="item_desc">Gérer les informations des matières et des classes de l'école<a href="{{ route('personnels.classes_matières') }}" class="btn btn-info">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
-                <h3>Notifications<i class="fa fa-inbox" aria-hidden="true"></i></h3>
-                <div class="item_desc">Accéder à tous vos notifications<a href="#" class="btn btn-info">Continuer</a> </div>
+                <h3>Gestion des salles<i class="fa fa-building-o" aria-hidden="true"></i></h3>
+                <div class="item_desc">Gérer les informations des salles de l'école<a href="#" class="btn btn-info">Continuer</a> </div>
             </div>
         </div>
     </div>

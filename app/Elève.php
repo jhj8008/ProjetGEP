@@ -29,4 +29,8 @@ class Elève extends Authenticatable
     public function negligences(){
         return $this->hasMany('App\Negligence');
     }
+
+    public function notes(){
+        return $this->hasMany('App\Note');
+    }
 }

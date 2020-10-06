@@ -71,12 +71,26 @@ Route::name('enseignants.')->group(function(){
 
     // Gestion des notes des élèves
     Route::get('espace_employe/espace_enseignant/notes_et_remarques', 'GestionNotesController@index')->name('notes_et_remarques');
+    Route::get('espace_employe/espace_enseignant/notes_et_remarques/{id}/liste_notes_élève/', 'GestionNotesController@getListeNotesELève')->name('liste_notes_élève');
+    Route::get('espace_employe/espace_enseignant/notes_et_remarques/{id}/page_note/{note_id}', 'GestionNotesController@getPageNote')->name('page_note_élève');
+    Route::post('espace_employe/espace_enseignant/notes_et_remarques/{id}/liste_notes_élève/{note_id}/modifier_note', 'GestionNotesController@modifierNote')->name('modifier_note');
 
     // Gestion des bulletins des élèves
     Route::get('espace_employe/espace_enseignant/bulletins', 'GestionBulletinsController@index')->name('bulletins');
+    Route::get('espace_employe/espace_enseignant/bulletins/liste_classe/{id}', 'GestionBulletinsController@getListeClasse')->name('liste_classe');
+    //Route::get('espace_employe/espace_enseignant/bulletins/liste_classe/{classe_id}/page_bulletin_élève/{id}', 'GestionBulletinsController@getBulletinElève')->name('page_bulletin_élève');
+    //Route::get('bulletin/{classe_id}/page_bulletin_élève/{elève_id}/générer_pdf/{nbr_retard}/{nbr_absence}/{nbr_élève}/{sum_coef}/{sum_coef_note}/{moyenne}/{date}/', 'GestionBulletinsController@generatePDF')->name('bulletin.genererBulletin');
+    Route::get('bulletins/{classe_id}/page_bulletin_élève/{id}/générer_pdf/', 'GestionBulletinsController@generatePDF')->name('page_bulletin_élève');
 
     // Gestion des cahiers de texte
-    Route::get('espace_employe/espace_enseignant/cahiers_texte', 'GestionCahierDeTexteController@index')->name('cahiers_texte');
+    Route::get('espace_employe/espace_enseignant/cahiers_texte', 'GestionCahierTexteController@index')->name('cahiers_texte');
+    Route::get('espace_employe/espace_enseignant/cahiers_texte/{id}', 'GestionCahierTexteController@getListeClasses')->name('liste_classes_cahier');
+    Route::get('espace_employe/espace_enseignant/cahiers_texte/{matId}/cahier_de_texte/{id}/', 'GestionCahierTexteController@getCahierTexte')->name('page_cahier_de_texte');
+    Route::get('espace_employe/espace_enseignant/cahiers_texte/{matId}/cahier_de_texte/{classe_id}/supprimer_tache/{id}', 'GestionCahierTexteController@supprimerTache')->name('supprimer_tache_cahier');
+    Route::get('espace_employe/espace_enseignant/cahiers_texte/{matId}/cahier_de_texte/{classe_id}/modifier_tache/{id}', 'GestionCahierTexteController@ouvrirTache')->name('ouvrir_tache_cahier');
+    Route::post('espace_employe/espace_enseignant/cahiers_texte/{matId}/cahier_de_texte/{classe_id}/modifier_tache/{tache_id}', 'GestionCahierTexteController@modifierTache')->name('modifier_tache');
+    Route::get('espace_employe/espace_enseignant/cahiers_texte/{matId}/cahier_de_texte/{classe_id}/créer_tache/', 'GestionCahierTexteController@ouvrirFormTache')->name('créer_tache_cahier');
+    Route::post('espace_employe/espace_enseignant/cahiers_texte/{matId}/cahier_de_texte/{classe_id}/créer_tache/', 'GestionCahierTexteController@ajouterTache')->name('ajouter_ligne');
 });
 
 Route::name('admins.')->group(function(){
@@ -91,12 +105,62 @@ Route::name('employés.')->group(function(){
 });
 
 Route::name('personnels.')->group(function(){
-    Route::get('espace_personnel', 'Espace_personnelController@index')->name('espace_personnel')->middleware('employe');
+    Route::get('espace_employe/espace_personnel', 'EspacePersonnelController@index')->name('espace_personnel');
+    Route::get('espace_employe/espace_personnel/liste_élèves', 'GestionInfoElèveController@index')->name('liste_élèves');
+    Route::get('espace_employe/espace_personnel/liste_élèves/profile_élève/{id}', 'GestionInfoElèveController@getProfileElève')->name('profile_élève');
+    Route::get('espace_employe/espace_personnel/liste_élèves/profile_élève/{id}/supprimer_profile', 'GestionInfoElèveController@supprimerProfileElève')->name('supprimer_profile');
+    Route::get('espace_employe/espace_personnel/liste_élèves/profile_élève/{id}/modifier_profile_form', 'GestionInfoElèveController@getFormModification')->name('form_modification_profile');
+    Route::post('espace_employe/espace_personnel/liste_élèves/profile_élève/{id}/modifier_profile_form/modifier_profile/{parent_id}', 'GestionInfoElèveController@modifierProfile')->name('modifier_profile');
+
+    Route::get('espace_employe/espace_personnel/classes_matières', 'GestionClassesMatièresController@index')->name('classes_matières');
+    Route::get('espace_employe/espace_personnel/classes_matières/gestion_classes', 'GestionClassesMatièresController@pageGestionClasses')->name('gestion_classes');
+    Route::get('espace_employe/espace_personnel/classes_matières/gestion_matières', 'GestionClassesMatièresController@pageGestionMatières')->name('gestion_matières');
+    Route::get('espace_employe/espace_personnel/classes_matières/gestion_classes/supprimer_classe/{id}', 'GestionClassesMatièresController@supprimerClasse')->name('supprimer_classe');
+    Route::get('espace_employe/espace_personnel/classes_matières/gestion_classes/form_modifier_classe/{id}', 'GestionClassesMatièresController@pageModifierClasse')->name('form_modifier_classe');
+    Route::get('espace_employe/espace_personnel/classes_matières/gestion_classes/form_ajouter_classe', 'GestionClassesMatièresController@pageAjouterClasse')->name('form_ajouter_classe');
+    Route::post('espace_employe/espace_personnel/classes_matières/gestion_classes/form_modifier_classe/{id}/modifier_classe', 'GestionClassesMatièresController@modifierClasse')->name('modifier_classe');
+    Route::post('espace_employe/espace_personnel/classes_matières/gestion_classes/form_ajouter_classe/ajouter_classe', 'GestionClassesMatièresController@ajouterClasse')->name('ajouter_classe');
+
+    Route::get('espace_employe/espace_personnel/classes_matières/gestion_matières/supprimer_matière/{id}', 'GestionClassesMatièresController@supprimerMatière')->name('supprimer_matière');
+    Route::get('espace_employe/espace_personnel/classes_matières/gestion_matières/form_modifier_matière/{id}', 'GestionClassesMatièresController@pageModifierMatière')->name('form_modifier_matière');
+    Route::get('espace_employe/espace_personnel/classes_matières/gestion_matières/form_ajouter_matière', 'GestionClassesMatièresController@pageAjouterMatière')->name('form_ajouter_matière');
+    Route::post('espace_employe/espace_personnel/classes_matières/gestion_matières/form_modifier_matière/{id}/modifier_matière', 'GestionClassesMatièresController@modifierMatière')->name('modifier_matière');
+    Route::post('espace_employe/espace_personnel/classes_matières/gestion_matières/form_ajouter_matière/ajouter_matière', 'GestionClassesMatièresController@ajouterMatière')->name('ajouter_matière');
+
+    Route::get('espace_employe/espace_personnel/fiches_personnelles', 'GestionFichesPersonnellesController@index')->name('fiches_personnelles');
+    Route::get('espace_employe/espace_personnel/fiches_personnelles/voir_fiche_personnelle/{id}', 'GestionFichesPersonnellesController@getFichePersonnelle')->name('voir_fiche_personnelle');
 });
 
 Route::get('my_page', function(){
-    echo '<h1>Variable needed: ' . url()->full() . '</h1>';
-    //echo '<h1>Lien de la page: ' . url()->previous() . '</h1>';
+    /*\App\Cahier_texte::create([
+        'date_publication' => date('Y-m-d'),
+        'a_faire' => 'Exo 10 et 11 page 30 du manuel',
+        'fait' => 'Chapitre 7',
+        'cours' => 'Participe présent',
+        'niveau_scolaire' => 'CP1',
+        'employe_id' => 3,
+        'classe_id' => 3,
+        'matière_id' => 1,
+    ]);*/
+    \App\Fiche_personnelle::create([
+        'nationalité' => 'Marocaine',
+        'num_carte_sejour' => '147855369', 
+        'num_carte_travail' => '874599321', 
+        'situation_familiale' => 'Marié', 
+        'num_sécurité_sociale' => '661250250', 
+        'code_postale' => '40000', 
+        'ville' => 'Marrakech', 
+        'qualification' => 'Diplôme master en liérature française', 
+        'contrat' => 'CDD', 
+        'durée' => '4 mois', 
+        'salaire_mensuel' => '7800', 
+        'date_entrée' => date('Y-m-d',strtotime('2016-09-02')), 
+        'date_sortie' => date('Y-m-d',strtotime('2021-08-22')), 
+        'situation_avant_enbauche' => 'Étudiant', 
+        'employe_id' => 3,
+    ]);
+
+    echo '<h2>Fiche personnelle ajouté avec succès 2</h2>';
 });
 
 /*
@@ -107,28 +171,14 @@ ali -> 9
 maria -> 18 
 Sara -> 12
 youssef -> 13
-
-Route::get('my_page', function(){
-    \App\Negligence::create([
-        'date' => date('Y-m-d',strtotime('2012-09-23')),
-        'durée' => '00:15',
-        'raison' => 'Inconnu',
-        'période' => 'matin',
-        'type' => 'Retard',
-        'employe_id' => 3,
-        'elève_id' => 13,
-        'matière_id' => 1,
-    ]);
-
-    echo "<h1>Retard ajouté avec succès 2</h1>";
-});*/
+*/
 
 /*Route::get('my_page', function(){
     $enseignant = \App\Employe::find(3);
-    //$enseignant->classes()->attach(4);
-    //echo '<h2>Attachement succeeded 4</h2>';
-    echo '<h1>Les classes prises par prof. ' . $enseignant->nom . ' sont: </h1>';
-    foreach($enseignant->classes as $c){
-        echo '<h2>' . $c->nom_classe . '</h2>';
+    //$enseignant->matières()->attach(3);
+    //echo '<h2>Matière Attachement succeeded 3</h2>';
+    echo '<h1>Les matières prises par prof. ' . $enseignant->nom . ' sont: </h1>';
+    foreach($enseignant->matières as $m){
+        echo '<h2>' . $m->nom . '</h2>';
     }
 });*/

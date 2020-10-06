@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class PersonnelMiddleware
@@ -15,7 +16,6 @@ class PersonnelMiddleware
      */
     public function handle($request, Closure $next)
     {
-
         if(!Auth::guard('employe')->check()){
             return redirect('/');
         }

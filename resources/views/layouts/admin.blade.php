@@ -12,9 +12,11 @@
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito|Monoton|Quicksand|Raleway|Roboto|Montserrat|Oswald|Poppins|Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Monoton|Quicksand|Raleway|Roboto|Montserrat|Oswald|Poppins|Lato|Bitner|Exo" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    @yield('links')
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -153,24 +155,35 @@
                             <a class="nav-link" href="{{ route('parents.forum') }}">{{ __('Forum') }}</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="employéMenuLink" href="{{ route('employés.espace_employe') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ __('Espace employé') }}<span class="caret"></span>
+                            <a class="nav-link dropdown-toggle" id="employéMenuLink" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ __('Menu employé') }}<span class="caret"></span>
                             </a>
+
                             <ul class="dropdown-menu" role="menu" aria-labelledby="employéMenuLink">
-                                <li><a class="dropdown-item" href="#">Espace personnels</a></li>
+                                <li><a class="dropdown-item" href="{{ route('employés.espace_employe') }}"> Espace employé </a></li>
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item dropdown-toggle" href="{{ route('personnels.espace_personnel') }}">{{ __('Espace personnel') }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#"> Gestion des emplois du temps </a></li>
+                                        <li><a class="dropdown-item" href="{{ route('personnels.liste_élèves') }}"> Gestion des informations des élèves </a></li>
+                                        <li><a class="dropdown-item" href="#"> Gestion des enseignants </a>
+                                        <li><a class="dropdown-item" href="#"> Gestion des fiches personnelles </a></li>
+                                        <li><a class="dropdown-item" href="{{ route('personnels.classes_matières') }}"> Gestion des classes et matières </a></li>
+                                        <li><a class="dropdown-item" href="#"> Gestion des salles </a></li>
+                                    </ul>
+                                </li>
                                 <li class="dropdown-submenu">
                                     <a class="dropdown-item dropdown-toggle" href="{{ route('enseignants.espace_enseignant') }}"> {{ __('Espace enseignant') }} </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#"> Notes et remarques </a></li>
-                                        <li><a class="dropdown-item" href="#"> Absences et retards </a></li>
-                                        <li><a class="dropdown-item" href="#"> mise en ligne des notes </a>
-                                        <li><a class="dropdown-item" href="#"> Saisir des cahiers de texte </a></li>
+                                        <li><a class="dropdown-item" href="{{ route('enseignants.notes_et_remarques') }}"> Notes et remarques </a></li>
+                                        <li><a class="dropdown-item" href="{{ route('enseignants.absences_retards') }}"> Absences et retards </a></li>
+                                        <li><a class="dropdown-item" href="{{ route('enseignants.bulletins') }}"> Bulletins </a>
+                                        <li><a class="dropdown-item" href="{{ route('enseignants.cahiers_texte') }}"> Saisir des cahiers de texte </a></li>
                                     </ul>
                                 </li>
-                                <li><a class="dropdown-item" href="#"> Espace admin </a></li>
-                                <li><a class="dropdown-item" href="#"> Fiche personnelle </a>
-                                <li><a class="dropdown-item" href="#"> Forum </a>
-                                <li><a class="dropdown-item" href="#"> Notifications </a>
+                                <li><a class="dropdown-item" href="{{ route('admins.espace_admin') }}"> Espace admin </a></li>
+                                <li><a class="dropdown-item" href="#"> Fiche personnelle </a></li>
+                                <li><a class="dropdown-item" href="#"> Notifications </a></li>
                             </ul>
                         </li>
                         <li class="nav-item">

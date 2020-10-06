@@ -23,4 +23,8 @@ class Classe extends Model
     public function employes(){
         return $this->belongsToMany('App\Employe', 'classe_employe');
     }
+
+    public function cahier_textes(){
+        return $this->hasMany('App\Cahier_texte');
+    }
 }

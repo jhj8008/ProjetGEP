@@ -149,7 +149,7 @@
                                             <option value="M">Male</option>
                                             <option value="F">Femelle</option>
                                         </select>
-                                        @error('fonction_père')
+                                        @error('sexe')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

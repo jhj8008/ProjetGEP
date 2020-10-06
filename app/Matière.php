@@ -23,4 +23,12 @@ class Matière extends Model
     public function negligences(){
         return $this->hasMany('App\Negligence');
     }
+
+    public function notes(){
+        return $this->hasMany('App\Note');
+    }
+
+    public function cahier_textes(){
+        return $this->hasMany('App\Cahier_texte');
+    }
 }
