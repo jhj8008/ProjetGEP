@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'GEP') }}</title>
+    <title>@yield('page_title', 'GEP')</title>
     <!-- Scripts -->
     
     <!-- Fonts -->
@@ -164,12 +164,12 @@
                                 <li class="dropdown-submenu">
                                     <a class="dropdown-item dropdown-toggle" href="{{ route('personnels.espace_personnel') }}">{{ __('Espace personnel') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#"> Gestion des emplois du temps </a></li>
+                                        <li><a class="dropdown-item" href="{{ route('personnels.gestion_emplois_du_temps') }}"> Gestion des emplois du temps </a></li>
                                         <li><a class="dropdown-item" href="{{ route('personnels.liste_élèves') }}"> Gestion des informations des élèves </a></li>
-                                        <li><a class="dropdown-item" href="#"> Gestion des enseignants </a>
-                                        <li><a class="dropdown-item" href="#"> Gestion des fiches personnelles </a></li>
+                                        <li><a class="dropdown-item" href="{{ route('personnels.gestion_enseignants') }}"> Gestion des enseignants </a>
+                                        <li><a class="dropdown-item" href="{{ route('personnels.fiches_personnelles') }}"> Gestion des fiches personnelles </a></li>
                                         <li><a class="dropdown-item" href="{{ route('personnels.classes_matières') }}"> Gestion des classes et matières </a></li>
-                                        <li><a class="dropdown-item" href="#"> Gestion des salles </a></li>
+                                        <li><a class="dropdown-item" href="{{ route('personnels.gestion_actualités_activités') }}"> Gestion des actualités et activités </a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown-submenu">

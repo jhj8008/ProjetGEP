@@ -38,4 +38,16 @@ class Employe extends Authenticatable
     public function fiche_personnelle(){
         return $this->hasOne('App\Fiche_personnelle');
     }
+
+    public function séances(){
+        return $this->hasMany('App\Séance');
+    }
+
+    public function articles(){
+        return $this->hasMany('App\Article');
+    }
+
+    public function negligenceemployes(){
+        return $this->hasMany('App\NegligenceEmploye');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EspaceEmployeController extends Controller
 {
@@ -24,5 +25,10 @@ class EspaceEmployeController extends Controller
     public function index()
     {
         return view('Auth\employe\espace_employe');
+    }
+
+    public function getFichePersonnelle(){
+        /*$f_p = Auth::guard('employe')->user()->fiche_personnelle;
+        return view('Auth\employe\personnel\fiche_personnelle', compact('f_p'));*/
     }
 }

@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+ {{ __('Emplois du temps') }}
+@endsection
+
 @section('scripts')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="htt^s://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
@@ -11,7 +15,7 @@
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#liste_élèves').DataTable({
+        $('#liste_enseignants').DataTable({
             "lengthChange": false,
             "ordering": true,
             "pageLength": 10,
@@ -79,34 +83,42 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="title">Fiches personnelles des enseignants</h1>
         <div class="container mb-3 mt-3">
-            <table id="liste_élèves" class="table table-dark table-hover dt-responsive" cellspacing="0" style="width:100%">
+            <table id="liste_enseignants" class="table table-dark table-hover dt-responsive" cellspacing="0" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Id de fiche</th>
-                        <th>Nom enseignant</th>
-                        <th>Carte de travail</th>
+                        <th>Id</th>
+                        <th>Nom complet</th>
+                        <th>Sexe</th>
+                        <th>E-mail</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody class="text-body">
-                    @foreach($f_p as $f)
+                    @foreach($enseignants as $enseignant)
                         <tr>
-                            <td class="align-middle"><strong style="color:#ffcbcb;">{{ $f->id }}</strong></td>
-                            <td class="align-middle">{{ $f->employe->nom }}, {{ $f->employe->prénom }}</td>
-                            <td class="align-middle">{{ $f->num_carte_travail }}</td>
+                            <td class="align-middle"><strong style="color:#ffcbcb;">{{ $enseignant->id }}</strong></td>
+                            <td class="align-middle">{{ $enseignant->nom }}, {{ $enseignant->prénom }}</td>
+                            <td class="align-middle">
+                                @if($enseignant->sexe == 'M')
+                                    {{ __('Homme') }}
+                                @else
+                                    {{ __('Femme') }}
+                                @endif
+                            </td>
+                            <td class="align-middle">{{ $enseignant->email }}</td>
                             <td>
-                                <a href="{{ route('personnels.voir_fiche_personnelle', ['id' => $f->id]) }}" class="btn btn-outline-secondary" title="Voir ce profile">{{ __('Voir') }}</a>
+                                <a href="{{ route('personnels.liste_matières_affecter', ['id' => $enseignant->id]) }}" class="btn btn-outline-secondary" title="Voir ce profile">{{ __('Voir') }}</a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Id de fiche</th>
-                        <th>Nom enseignant</th>
-                        <th>Carte de travail</th>
+                        <th>Id</th>
+                        <th>Nom complet</th>
+                        <th>Sexe</th>
+                        <th>E-mail</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>

@@ -102,6 +102,7 @@ Route::name('employés.')->group(function(){
     Route::get('espace_employe', 'EspaceEmployeController@index')->name('espace_employe');
     Route::get('loginEmploye', 'Auth\LoginEmployeController@index')->name('loginEmploye');
     Route::post('login_employe', 'Auth\LoginEmployeController@login')->name('login_employe');
+    Route::get('fiche_personnelle', 'EspaceEmployeController@getFichePersonnelle')->name('get_fiche_personnelle');
 });
 
 Route::name('personnels.')->group(function(){
@@ -129,6 +130,59 @@ Route::name('personnels.')->group(function(){
 
     Route::get('espace_employe/espace_personnel/fiches_personnelles', 'GestionFichesPersonnellesController@index')->name('fiches_personnelles');
     Route::get('espace_employe/espace_personnel/fiches_personnelles/voir_fiche_personnelle/{id}', 'GestionFichesPersonnellesController@getFichePersonnelle')->name('voir_fiche_personnelle');
+    Route::get('espace_employe/espace_personnel/fiches_personnelles/voir_fiche_personnelle/{id}/form_modifier_fiche', 'GestionFichesPersonnellesController@pageFormModifierFiche')->name('form_modifier_fiche');
+    Route::get('espace_employe/espace_personnel/fiches_personnelles/voir_fiche_personnelle/{id}/supprimer_fiche', 'GestionFichesPersonnellesController@supprimerFiche')->name('supprimer_fiche');
+    Route::post('espace_employe/espace_personnel/fiches_personnelles/voir_fiche_personnelle/{id}/form_modifier_fiche/modifier_fiche', 'GestionFichesPersonnellesController@modifierFiche')->name('modifier_fiche');
+
+    Route::get('espace_employe/espace_personnel/gestion_emplois_du_temps', 'GestionEmploisDuTempsController@index')->name('gestion_emplois_du_temps');
+    Route::get('espace_employe/espace_personnel/gestion_emplois_du_temps/{id}/jours', 'GestionEmploisDuTempsController@getEmploiDuTemp')->name('emploi_du_temps');
+    Route::get('espace_employe/espace_personnel/gestion_emplois_du_temps/{id}/jours/{jour}/séances_jour', 'GestionEmploisDuTempsController@getSéanceJour')->name('séances_jour');
+    Route::get('espace_employe/espace_personnel/gestion_emplois_du_temps/{edt_id}/jours/{jour}/supprimer_séance/{id}', 'GestionEmploisDuTempsController@supprimerSéance')->name('supprimer_séance');
+    Route::get('espace_employe/espace_personnel/gestion_emplois_du_temps/{edt_id}/jours/{jour}/form_modifier_séance/{id}', 'GestionEmploisDuTempsController@pageModifierSéance')->name('form_modifier_séance');
+    Route::get('espace_employe/espace_personnel/gestion_emplois_du_temps/{id}/jours/{jour}/form_ajouter_séance', 'GestionEmploisDuTempsController@pageAjouterSéance')->name('form_ajouter_séance');
+
+    Route::post('espace_employe/espace_personnel/gestion_emplois_du_temps/{edt_id}/jours/{jour}/modifier_séance/{id}', 'GestionEmploisDuTempsController@modifierSéance')->name('modifier_séance');
+    Route::post('espace_employe/espace_personnel/gestion_emplois_du_temps/{id}/jours/{jour}/ajouter_séance', 'GestionEmploisDuTempsController@ajouterSéance')->name('ajouter_séance');
+    Route::post('get_matières/', 'GestionEmploisDuTempsController@getMatières')->name('get_matières');
+
+    // gestion des actualités et activités
+    Route::get('espace_employe/espace_personnel/gestion_actualités_activités', 'GestionActualitésActivitésController@index')->name('gestion_actualités_activités');
+    Route::get('espace_employe/espace_personnel/gestion_actualités_activités/form_créer_article', 'GestionActualitésActivitésController@pageCréerArticle')->name('form_créer_article');
+    Route::post('espace_employe/espace_personnel/gestion_actualités_activités/form_créer_article/créer_article', 'GestionActualitésActivitésController@créerArticle')->name('créer_article');
+    Route::get('espace_employe/espace_personnel/gestion_actualités_activités/supprimer_article/{id}', 'GestionActualitésActivitésController@supprimerArticle')->name('supprimer_article');
+    Route::get('espace_employe/espace_personnel/gestion_actualités_activités/page_article/{id}', 'GestionActualitésActivitésController@getArticle')->name('page_article');
+
+    Route::get('espace_employe/espace_personnel/gestion_actualités_activités/form_modifier_article/{id}', 'GestionActualitésActivitésController@pageModifierArticle')->name('form_modifier_article');
+    Route::post('espace_employe/espace_personnel/gestion_actualités_activités/form_modifier_article/{id}/modifier_article', 'GestionActualitésActivitésController@modifierArticle')->name('modifier_article');
+
+    // gestion des compts enseignants
+    Route::get('espace_employe/espace_personnel/gestion_enseignants', 'GestionEnseignantsController@index')->name('gestion_enseignants');
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/comptes_enseignants', 'GestionEnseignantsController@getEnseignants')->name('comptes_enseignants');
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/comptes_enseignants/form_créer_enseignant', 'GestionEnseignantsController@pageFormAjouterEnseignant')->name('form_ajouter_enseignant');
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/comptes_enseignants/supprimer_enseignant/{id}/', 'GestionEnseignantsController@supprimerEnseignant')->name('supprimer_enseignant');
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/comptes_enseignants/form_modifier_enseignant/{id}/', 'GestionEnseignantsController@pageFormModifierEnseignant')->name('form_modifier_enseignant');
+    Route::post('espace_employe/espace_personnel/gestion_enseignants/comptes_enseignants/form_créer_enseignant/créer_enseignant', 'GestionEnseignantsController@créerEnseignant')->name('créer_enseignant');
+    Route::post('espace_employe/espace_personnel/gestion_enseignants/comptes_enseignants/form_modifier_enseignant/{id}/modifier_enseignant', 'GestionEnseignantsController@modifierEnseignant')->name('modifier_enseignant');
+
+    // affectation des classes aux enseignants
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/affectation_des_classes/', 'GestionEnseignantsController@pageAffectationClasses')->name('page_affectation_classes');
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/affectation_des_classes/liste_classes_affecter/{id}', 'GestionEnseignantsController@getListeClasses')->name('liste_classes_affecter');
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/affectation_des_classes/liste_classes_affecter/{ensg_id}/supprimer_classe/{id}', 'GestionEnseignantsController@supprimerClasse')->name('supprimer_classe_enseignant');
+    Route::post('espace_employe/espace_personnel/gestion_enseignants/affectation_des_classes/liste_classes_affecter/{ensg_id}/ajouter_classe/', 'GestionEnseignantsController@ajouterClasseEnseignant')->name('ajouter_classe');
+    
+    // affectation des matières aux enseignants
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/affectation_des_matières/', 'GestionEnseignantsController@pageAffectationMatières')->name('page_affectation_matières');
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/affectation_des_matières/liste_matières_affecter/{id}', 'GestionEnseignantsController@getListeMatières')->name('liste_matières_affecter');
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/affectation_des_matières/liste_matières_affecter/{ensg_id}/supprimer_matière/{id}', 'GestionEnseignantsController@supprimerMatière')->name('supprimer_matière_enseignant');
+    Route::post('espace_employe/espace_personnel/gestion_enseignants/affectation_des_matières/liste_matières_affecter/{ensg_id}/ajouter_matière/', 'GestionEnseignantsController@ajouterMatièreEnseignant')->name('ajouter_matière');
+
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/gestion_negligences_enseignant', 'NegligencesEmployeController@getListeEnseignants')->name('gestion_negligences_enseignant');
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/gestion_negligences_enseignant/liste_negligences/{id}', 'NegligencesEmployeController@getListeNegligencesEnseignant')->name('liste_negligences');
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/gestion_negligences_enseignant/liste_negligences/{ensg_id}/form_modifier_negligence/{id}', 'NegligencesEmployeController@pageFormModifierNegligence')->name('form_modifier_negligence');
+    Route::post('espace_employe/espace_personnel/gestion_enseignants/gestion_negligences_enseignant/liste_negligences/{ensg_id}/form_modifier_negligence/{id}/modifier_negligence', 'NegligencesEmployeController@modifierNegligence')->name('modifier_negligence');
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/gestion_negligences_enseignant/liste_negligences/{ensg_id}/supprimer_negligence/{id}', 'NegligencesEmployeController@supprimerNegligence')->name('supprimer_negligence');
+    Route::get('espace_employe/espace_personnel/gestion_enseignants/gestion_negligences_enseignant/liste_negligences/{ensg_id}/form_ajouter_negligence', 'NegligencesEmployeController@pageFormAjouterNegligence')->name('form_ajouter_negligence');
+    Route::post('espace_employe/espace_personnel/gestion_enseignants/gestion_negligences_enseignant/liste_negligences/{ensg_id}/form_ajouter_negligence/ajouter_negligence', 'NegligencesEmployeController@ajouterNegligence')->name('ajouter_negligence');
 });
 
 Route::get('my_page', function(){
@@ -142,7 +196,7 @@ Route::get('my_page', function(){
         'classe_id' => 3,
         'matière_id' => 1,
     ]);*/
-    \App\Fiche_personnelle::create([
+    /*\App\Fiche_personnelle::create([
         'nationalité' => 'Marocaine',
         'num_carte_sejour' => '147855369', 
         'num_carte_travail' => '874599321', 
@@ -158,9 +212,12 @@ Route::get('my_page', function(){
         'date_sortie' => date('Y-m-d',strtotime('2021-08-22')), 
         'situation_avant_enbauche' => 'Étudiant', 
         'employe_id' => 3,
-    ]);
+    ]);*/
 
-    echo '<h2>Fiche personnelle ajouté avec succès 2</h2>';
+    $edt = \App\Emploi_temp::find(1);
+    $edt->séances()->attach(1);
+
+    echo '<h1>Séance attaché à emploi du temps</h1>';
 });
 
 /*

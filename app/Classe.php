@@ -27,4 +27,8 @@ class Classe extends Model
     public function cahier_textes(){
         return $this->hasMany('App\Cahier_texte');
     }
+
+    public function emploi_temp(){
+        return $this->hasOn('App\Emploi_temp');
+    }
 }

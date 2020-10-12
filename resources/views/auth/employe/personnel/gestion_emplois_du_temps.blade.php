@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+ {{ __('Emplois du temps') }}
+@endsection
+
 @section('scripts')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="htt^s://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
@@ -79,34 +83,32 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="title">Fiches personnelles des enseignants</h1>
+        <h1 class="title">Liste des emplois du temps</h1>
         <div class="container mb-3 mt-3">
             <table id="liste_élèves" class="table table-dark table-hover dt-responsive" cellspacing="0" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Id de fiche</th>
-                        <th>Nom enseignant</th>
-                        <th>Carte de travail</th>
+                        <th>Id emploi</th>
+                        <th>Classe</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody class="text-body">
-                    @foreach($f_p as $f)
+                    @foreach($emplois as $emploi)
                         <tr>
-                            <td class="align-middle"><strong style="color:#ffcbcb;">{{ $f->id }}</strong></td>
-                            <td class="align-middle">{{ $f->employe->nom }}, {{ $f->employe->prénom }}</td>
-                            <td class="align-middle">{{ $f->num_carte_travail }}</td>
+                            <td class="align-middle"><strong style="color:#ffcbcb;">{{ $emploi->id }}</strong></td>
+                            <td class="align-middle">{{ $emploi->classe->nom_classe }}</td>
                             <td>
-                                <a href="{{ route('personnels.voir_fiche_personnelle', ['id' => $f->id]) }}" class="btn btn-outline-secondary" title="Voir ce profile">{{ __('Voir') }}</a>
+                                <a href="{{ route('personnels.emploi_du_temps', ['id' => $emploi->id]) }}" class="btn btn-outline-secondary" title="Voir ce profile">{{ __('Voir emploi du temps') }}</a>
                             </td>
                         </tr>
+                        </div>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Id de fiche</th>
-                        <th>Nom enseignant</th>
-                        <th>Carte de travail</th>
+                        <th>Id emploi</th>
+                        <th>Classe</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>

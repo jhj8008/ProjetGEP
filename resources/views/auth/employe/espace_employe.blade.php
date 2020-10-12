@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+    {{ __('Espace employé') }}
+@endsection
+
 @section('styles')
     <style>
         .my_content{
@@ -46,27 +50,27 @@
         <div class="row">
             <div class="col-sm-6 menu_item">
                 <h3>Espace de l'enseignant<i class="fa fa-graduation-cap" aria-hidden="true"></i></h3>
-                <div class="item_desc">Espace de l'enseignant<a href="{{ route('enseignants.espace_enseignant') }}" class="btn btn-info"><span>Continuer</span></a></div>
+                <div class="item_desc">Espace de l'enseignant<a href="{{ route('enseignants.espace_enseignant') }}" class="btn btn-info float-right"><span>Continuer</span></a></div>
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Espace du personnel<i class="fa fa-object-group" aria-hidden="true"></i></h3>
-                <div class="item_desc">Espace du personnel<a href="{{ route('personnels.espace_personnel') }}" class="btn btn-info">Continuer</a> </div>
+                <div class="item_desc">Espace du personnel<a href="{{ route('personnels.espace_personnel') }}" class="btn btn-info float-right">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Espace admin<i class="fa fa-cog" aria-hidden="true"></i></h3>
-                <div class="item_desc">Espace admin<a href="{{ route('admins.espace_admin') }}" class="btn btn-info">Continuer</a> </div>
+                <div class="item_desc">Espace admin<a href="{{ route('admins.espace_admin') }}" class="btn btn-info float-right">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Fiche personnelle<i class="fa fa-address-card" aria-hidden="true"></i> </h3>
-                <div class="item_desc">Fiche personnelle<a href="#" class="btn btn-info">Continuer</a> </div>
+                <div class="item_desc">Fiche personnelle<a href="{{ route('employés.get_fiche_personnelle') }}" class="btn btn-info float-right">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Forum<i class="fa fa-globe" aria-hidden="true"></i></h3>
-                <div class="item_desc">Accéder aux forum des employées <a href="#" class="btn btn-info">Continuer</a> </div>
+                <div class="item_desc">Accéder aux forum des employées <a href="#" class="btn btn-info float-right">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Notifications<i class="fa fa-bell" aria-hidden="true"></i></h3>
-                <div class="item_desc">Accéder à tous vos notifications<a href="#" class="btn btn-info">Continuer</a> </div>
+                <div class="item_desc">Accéder à tous vos notifications<a href="#" class="btn btn-info float-right">Continuer</a> </div>
             </div>
         </div>
     </div>

@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+ {{ __('Espace du personnel') }}
+@endsection
+
 @section('styles')
     <style>
         .my_content{
@@ -46,27 +50,27 @@
         <div class="row">
             <div class="col-sm-6 menu_item">
                 <h3>Gestion des emplois du temps<i class="fa fa-calendar-check-o" aria-hidden="true"></i></h3>
-                <div class="item_desc">Gérer les emplois du temps de différentes classes<a href="#" class="btn btn-info"><span>Continuer</span></a></div>
+                <div class="item_desc">Gérer les emplois du temps de différentes classes<a href="{{ route('personnels.gestion_emplois_du_temps') }}" class="btn btn-info float-right"><span>Continuer</span></a></div>
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Gestion des informations des élèves<i class="fa fa-address-book-o" aria-hidden="true"></i></h3>
-                <div class="item_desc">Gérer les informations des élèves et de leurs parents<a href="{{ route('personnels.liste_élèves') }}" class="btn btn-info">Continuer</a> </div>
+                <div class="item_desc">Gérer les informations des élèves et de leurs parents<a href="{{ route('personnels.liste_élèves') }}" class="btn btn-info float-right">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Gestion des enseignants<i class="fa fa-user-circle" aria-hidden="true"></i></h3>
-                <div class="item_desc">Gérer les informations des enseignants<a href="#" class="btn btn-info">Continuer</a> </div>
+                <div class="item_desc">Gérer les informations des enseignants<a href="{{ route('personnels.gestion_enseignants') }}" class="btn btn-info float-right">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
-                <h3>Gestion des fiches personnlles<i class="fa fa-address-card" aria-hidden="true"></i> </h3>
-                <div class="item_desc">Gérer votre fiche personnelle et aussi celles des enseignants<a href="{{ route('personnels.fiches_personnelles') }}" class="btn btn-info">Continuer</a> </div>
+                <h3>Gestion des fiches personnelles<i class="fa fa-address-card" aria-hidden="true"></i> </h3>
+                <div class="item_desc">Gérer votre fiche personnelle et aussi celles des enseignants<a href="{{ route('personnels.fiches_personnelles') }}" class="btn btn-info float-right">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Gestion des classes et matières<i class="fa fa-folder-open-o" aria-hidden="true"></i></h3>
-                <div class="item_desc">Gérer les informations des matières et des classes de l'école<a href="{{ route('personnels.classes_matières') }}" class="btn btn-info">Continuer</a> </div>
+                <div class="item_desc">Gérer les informations des matières et des classes de l'école<a href="{{ route('personnels.classes_matières') }}" class="btn btn-info float-right">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
-                <h3>Gestion des salles<i class="fa fa-building-o" aria-hidden="true"></i></h3>
-                <div class="item_desc">Gérer les informations des salles de l'école<a href="#" class="btn btn-info">Continuer</a> </div>
+                <h3>Gestion des actualités et activités<i class="fa fa-building-o" aria-hidden="true"></i></h3>
+                <div class="item_desc">Gérer les actualités et les activités de l'école<a href="{{ route('personnels.gestion_actualités_activités') }}" class="btn btn-info float-right">Continuer</a> </div>
             </div>
         </div>
     </div>

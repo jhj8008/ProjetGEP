@@ -140,9 +140,14 @@ class GestionClassesMatièresController extends Controller
     }
 
     protected function createClasse(array $data){
-        return Classe::create([
+        $classe = Classe::create([
             'nom_classe' => $data['nom_classe'],
             'limite' => intval($data['limite']),
+        ]);
+        \App\Emploi_temp::create([
+            'remarque' => 'Emploi du temps créé le ' . date('Y-m-d') . ' pour la classe ' . $classe->nom_classe,
+            'année_scolaire' => date('Y') . "-" . date('Y', strtotime('+1 year')),
+            'classe_id' => $classe->id,
         ]);
     }
 
