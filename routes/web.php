@@ -103,6 +103,19 @@ Route::name('employés.')->group(function(){
     Route::get('loginEmploye', 'Auth\LoginEmployeController@index')->name('loginEmploye');
     Route::post('login_employe', 'Auth\LoginEmployeController@login')->name('login_employe');
     Route::get('fiche_personnelle', 'EspaceEmployeController@getFichePersonnelle')->name('get_fiche_personnelle');
+    Route::get('espace_employe/forum_employe', 'EspaceEmployeController@getPageForum')->name('forum_employe');
+    Route::get('get_posts/', 'PostController@getPosts')->name('get_posts');
+
+    Route::get('forum_thread/{id}', 'PostController@getPostThread')->name('forum_thread');
+    Route::post('forum_thread/{id}/ajouter_commentaire/', 'PostController@ajouterCommentEmploye')->name('ajouter_commentaire');
+
+    Route::get('liste_sondages', 'VoteController@index')->name('liste_sondages');
+
+    Route::get('/polls/{id}', 'VoteController@candidates')->name('polls');
+    Route::post('/candidates/{candidate}', 'VoteController@incrementVotes')->name('inscrement_vote');
+
+    Route::get('forum/liste_sondages/form_ajouter_sondage', 'VoteController@pageFormAjouterSondage')->name('form_ajouter_sondage');
+    Route::post('forum/liste_sondages/form_ajouter_sondage/ajouter_sondage', 'VoteController@ajouterSondage')->name('ajouter_sondage');
 });
 
 Route::name('personnels.')->group(function(){
@@ -214,10 +227,14 @@ Route::get('my_page', function(){
         'employe_id' => 3,
     ]);*/
 
-    $edt = \App\Emploi_temp::find(1);
-    $edt->séances()->attach(1);
+    \App\Comment::create([
+        'description' => "Je pense que c'est lundi prochain, inchallah",
+        'post_id' => 1,
+        'employe_id' => 2,
+        'elèveparent_id' => 0, 
+    ]);
 
-    echo '<h1>Séance attaché à emploi du temps</h1>';
+    echo '<h1>Comment created 1</h1>';
 });
 
 /*

@@ -66,7 +66,7 @@
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Forum<i class="fa fa-globe" aria-hidden="true"></i></h3>
-                <div class="item_desc">Accéder aux forum des employées <a href="#" class="btn btn-info float-right">Continuer</a> </div>
+                <div class="item_desc">Accéder aux forum des employées <a href="{{ route('employés.forum_employe') }}" class="btn btn-info float-right">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Notifications<i class="fa fa-bell" aria-hidden="true"></i></h3>

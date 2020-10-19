@@ -10,8 +10,8 @@
 <script>
   tinymce.init({
     selector: '#message',
-    menubar: false,
-    plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+    menubar: true,
+    plugins: 'autolink lists media table',
     toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
     toolbar_mode: 'floating',
     tinycomments_mode: 'embedded',

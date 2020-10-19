@@ -18,7 +18,7 @@
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
-                height: 100vh;
+                /*height: 100vh;*/
                 margin: 0;
             }
 
@@ -50,6 +50,8 @@
                 font-family: 'Monoton', sans-serif;
                 text-align: center;
                 font-size: 84px;
+                margin-top: 14%;
+                margin-bottom: 9%;
             }
 
             .links{
@@ -141,6 +143,16 @@
             .direct{
                 font-weight: bold;
             }
+
+            .my_link{
+                color: #636b6f;
+                transition: all .5s;
+            }
+
+            .my_link:hover {
+                color: red;
+                transition: all .5s;
+            }
         </style>
     </head>
     <body>
@@ -148,12 +160,12 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if(Auth::guard('employe')->check() or Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a class="my_link" href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a  class="my_link"href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a class="my_link" href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
                 </div>
@@ -165,16 +177,16 @@
                 </div>
 
                 <div class="links">
-                    <a href="{{ route('parents.forum') }}">Forum</a>
-                    <a href="{{ route('parents.espace_élève') }}">Espace élève</a>
-                    <a href="{{ route('clients.actualités') }}">Actualités</a>
-                    <a href="{{ route('parents.absences_retards') }}">Absences & Retards</a>
-                    <a href="{{ route('parents.notes') }}">Notes</a>
-                    <a href="{{ route('clients.activités') }}">Activités</a>
-                    <a href="{{ route('parents.notifications') }}">Notifications</a>
-                    <a href="{{ route('employés.espace_employe') }}">Espace employé</a>
-                    <a href="{{ route('clients.à_propos') }}">À propos</a>
-                    <a href="{{ route('clients.contact') }}">Contact</a>
+                    <a class="my_link" href="{{ route('parents.forum') }}">Forum</a>
+                    <a class="my_link" href="{{ route('parents.espace_élève') }}">Espace élève</a>
+                    <a class="my_link" href="{{ route('clients.actualités') }}">Actualités</a>
+                    <a class="my_link" href="{{ route('parents.absences_retards') }}">Absences & Retards</a>
+                    <a class="my_link" href="{{ route('parents.notes') }}">Notes</a>
+                    <a class="my_link" href="{{ route('clients.activités') }}">Activités</a>
+                    <a class="my_link" href="{{ route('parents.notifications') }}">Notifications</a>
+                    <a class="my_link" href="{{ route('employés.espace_employe') }}">Espace employé</a>
+                    <a class="my_link" href="{{ route('clients.à_propos') }}">À propos</a>
+                    <a class="my_link" href="{{ route('clients.contact') }}">Contact</a>
                 </div>
                 <div class="d-flex justify-content-center" style="width:70%;margin-top:5%;margin-left:13%;margin-right:10%">
                     <h3 class="display-4">Mot du directeur</h3>

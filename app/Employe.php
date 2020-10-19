@@ -19,6 +19,10 @@ class Employe extends Authenticatable
     protected $table = 'employes';
     public $timestamps = false;
 
+    public function polls(){
+        return $this->belongsToMany('App\Poll', 'poll_user');
+    }
+
     public function matières(){
         return $this->belongsToMany('App\Matière', 'employe_matière');
     }
@@ -49,5 +53,13 @@ class Employe extends Authenticatable
 
     public function negligenceemployes(){
         return $this->hasMany('App\NegligenceEmploye');
+    }
+
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
+
+    public function comments(){
+        return $this->hasMany('App\Comment');
     }
 }

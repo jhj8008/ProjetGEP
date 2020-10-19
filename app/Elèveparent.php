@@ -36,4 +36,12 @@ class Elèveparent extends Authenticatable
     public function elèves(){
         return $this->hasMany('App\Elève');
     }
+
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
+
+    public function comments(){
+        return $this->hasMany('App\Comment');
+    }
 }
