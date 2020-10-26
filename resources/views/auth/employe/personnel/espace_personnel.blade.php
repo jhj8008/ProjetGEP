@@ -36,7 +36,9 @@
             height: 35px;
             width: 110px;
         }
-
+        .my_footer {
+            position: absolute;
+        }
     </style>
 @endsection
 
@@ -44,9 +46,6 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="titre">
-            <h1>Espace du personnel</h1>
-        </div>
         <div class="row">
             <div class="col-sm-6 menu_item">
                 <h3>Gestion des emplois du temps<i class="fa fa-calendar-check-o" aria-hidden="true"></i></h3>

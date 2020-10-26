@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+{{ __('Liste de classe') }}
+@endsection
+
 @section('scripts')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="htt^s://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
@@ -68,6 +72,10 @@
         font-family: 'Lato', sans-serif;
         font-weight: bold;
     }
+
+    .my_footer {
+        position: absolute;
+    }
 </style>
 
 @endsection
@@ -75,9 +83,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="title">Liste des notes des élèves</h1>
         <div class="container mb-3 mt-3">
-            <table id="liste_élèves" class="table table-striped table-bordered dt-responsive nowrap hover" cellspacing="0" style="width:100%">
+            <table id="liste_élèves" class="table table-hover table-bordered dt-responsive nowrap hover" cellspacing="0" style="width:100%">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -89,9 +96,9 @@
                 <tbody>
                     @foreach($élèves as $élève)
                             <tr>
-                                <td class="nbrs">{{ $élève->id }}</td>
-                                <td><strong style="color:#557A95;">{{ $élève->nom }}, {{ $élève->prénom }}</strong></td>
-                                <td class="nbrs">
+                                <td class="nbrs align-middle">{{ $élève->id }}</td>
+                                <td class="align-middle"><strong style="color:#557A95;">{{ $élève->nom }}, {{ $élève->prénom }}</strong></td>
+                                <td class="nbrs align-middle">
                                     @if($élève->sexe == 'M')
                                         {{ __('Garçon') }}
                                     @else

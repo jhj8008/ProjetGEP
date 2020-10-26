@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page_title')
- {{ __('Modifier une fiche personnelle') }}
+ {{ __('Modifier un compte enseignant') }}
 @endsection
 
 @section('styles')

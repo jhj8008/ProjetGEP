@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+{{ __('Ajouter une classe') }}
+@endsection
+
 @section('styles')
 <style>
     .title{

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\NotificationController;
+use App\Employe;
 
 class NegligencesEmployeController extends Controller
 {
@@ -32,7 +34,22 @@ class NegligencesEmployeController extends Controller
         if($validation->fails()){
             return redirect()->back()->withErrors($validation)->withInput();
         }
-        $this->createNegligence($request->all(), $enseignant_id);
+        $neg = $this->createNegligence($request->all(), $enseignant_id);
+
+        $enseignant = Employe::find($enseignant_id);
+
+        $notif_cont = new NotificationController();
+        $notifData = [
+            'name' => 'GEP',
+            'body' => 'Un(e) ' . $neg->type . ' vous [' . $enseignant->nom . ' ' . $enseignant->prénom . '] a été noté le: ' . $neg->date,
+            'thanks' => 'Cordialement',
+            'notifText' => 'Accèder à l\'espace des employés',
+            'notifUrl' => url('/espace_employe'),
+            'notif_id' => 007
+        ];
+
+        $notif_cont->sendEmployeNotification($notifData, $enseignant_id);
+
         return redirect()->route('personnels.liste_negligences', ['id' => $enseignant_id]);
     }
 

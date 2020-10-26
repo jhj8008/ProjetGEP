@@ -29,7 +29,7 @@ class AdminMiddleware
         }
 
         if(Auth::guard('employe')->check() && !Auth::guard('employe')->user()->admin){
-            return redirect('espace_employe');
+            return redirect('espace_employe')->with('failure', 'Désolé, cet espace est réservé aux admins uniquement');
         }
         return $next($request);
     }

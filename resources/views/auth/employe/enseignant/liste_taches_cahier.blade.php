@@ -1,9 +1,12 @@
 @extends('layouts.admin')
 
+@section('page_title')
+{{ __('Liste des tâches du cahier de texte') }}
+@endsection
+
 @section('scripts')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="htt^s://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-<title>Cahier de texte de  {{ $matière->nom }}</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootsrapcdn.com/bootstrap/4.3.1/bootstrap.min.js"></script>
@@ -90,6 +93,10 @@
     td {
         font-size: 13px;
     }
+
+    .my_footer {
+        position: absolute;
+    }
 </style>
 
 @endsection
@@ -97,7 +104,6 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="title">Cahier de texte de  {{ $matière->nom }}</h1>
         <div class="container mb-3 mt-3">
             <ul class="list-inline m-0">
                 <li class="list-inline-item">
@@ -110,7 +116,7 @@
                     <a class="btn btn-dark" href="{{ route('enseignants.cahiers_texte') }}">{{ __('Retour à la page des matières') }}</a>
                 </li>
             </ul>
-            <table id="liste_élèves" class="table table-striped table-bordered dt-responsive nowrap hover" cellspacing="0" style="width:100%">
+            <table id="liste_élèves" class="table table-hover table-bordered dt-responsive nowrap hover" cellspacing="0" style="width:100%">
                 <thead>
                     <tr>
                         <th>Date</th>

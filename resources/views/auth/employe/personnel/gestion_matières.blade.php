@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+{{ __('Gestion des matières') }}
+@endsection
+
 @section('scripts')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="htt^s://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
@@ -14,7 +18,8 @@
         $('#liste_élèves').DataTable({
             "lengthChange": false,
             "ordering": true,
-            "pageLength": 10,
+            "pageLength": 5,
+            saveState: true,
             "language": {
                 "search": "Chercher: ",
                 "emptyTable": "Aucun résultat",
@@ -91,6 +96,10 @@
         -moz-transition-duration: 0.5s;
         -o-transition-duration: 0.5s;
     }
+
+    .my_footer {
+        position: absolute;
+    }
 </style>
 
 @endsection
@@ -98,7 +107,6 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="title">Liste des classes</h1>
         <div class="container mb-3 mt-3">
             <div class="row float-left action-btns">
                 <a href="{{ route('personnels.form_ajouter_matière') }}" class="btn btn-primary a-btn-slide-text">

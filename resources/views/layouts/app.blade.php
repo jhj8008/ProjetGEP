@@ -7,12 +7,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'GEP') }}</title>
+    <title>@yield('page_title', 'GEP')</title>
     <!-- Scripts -->
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito|Monoton|Quicksand|Raleway|Roboto|Montserrat|Oswald|Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Monoton|Quicksand|Raleway|Roboto|Montserrat|Oswald|Poppins|Lato" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -133,6 +133,31 @@
             font-weight: bold;
             color: #05386B;
         }
+
+        .navbar-nav li:hover > ul.dropdown-menu {
+            display: block;
+        }
+        .dropdown-submenu {
+            position:relative;
+        }
+        .dropdown-submenu>.dropdown-menu {
+            top:0;
+            left:100%;
+            margin-top:-6px;
+        }
+
+        td, th{
+            text-align: center;
+        }
+
+        th {
+            font-size: 15px;
+        }
+
+        td {
+            font-size: 13px;
+            /*color: white;*/
+        }
     </style>
 
 </head>
@@ -159,17 +184,25 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('parents.forum') }}">{{ __('Forum') }}</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('parents.espace_élève') }}">{{ __('Espace élève') }}</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ route('parents.espace_élève') }}" id="parentMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ __('Espace élève') }}<span class="caret">
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="parentMenuLink">
+                                <li><a class="dropdown-item" href="{{ route('parents.espace_élève') }}"> Espace élève </a></li>
+                                <li><a class="dropdown-item" href="{{ route('parents.inscription') }}"> Inscription en ligne </a></li>
+                                <li><a class="dropdown-item" href="{{ route('parents.cahiers_de_texte') }}"> Cahier de texte </a></li>
+                                <li><a class="dropdown-item" href="{{ route('parents.liste_élèves') }}"> Liste des élèves </a></li>
+                                <li><a class="dropdown-item" href="{{ route('parents.emplois_du_temps') }}"> Emplois du temps </a></li>
+                            </ul>
+
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('clients.actualités') }}">{{ __('Actualités') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('clients.activités') }}">{{ __('Activités') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('parents.notifications') }}">{{ __('Notifications') }}</a>
                         </li>
 
                         @if (!Auth::guard('employe')->check() and !Auth::check())

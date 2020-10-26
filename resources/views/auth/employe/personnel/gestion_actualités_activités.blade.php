@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page_title')
- {{ __('Emplois du temps') }}
+ {{ __('Gestion des actualités et activités') }}
 @endsection
 
 @section('scripts')
@@ -18,7 +18,8 @@
         $('#liste_articles').DataTable({
             "lengthChange": false,
             "ordering": true,
-            "pageLength": 10,
+            "pageLength": 5,
+            saveState: true,
             "language": {
                 "search": "Chercher: ",
                 "emptyTable": "Aucun résultat",

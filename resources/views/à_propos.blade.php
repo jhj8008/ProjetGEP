@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page_title')
+{{ __('À propos') }}
+@endsection
+
 @section('styles')
 <style>
     .text{

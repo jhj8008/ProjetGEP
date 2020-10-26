@@ -1,19 +1,14 @@
 <template>
-    <div class="container">
+    <div class="container" id="btn_click">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card card-default">
                     <div class="card-header">Votes</div>
-                    <div class="candidates">
-                        <div id="app">
-                            Click Here <input type="radio" name="phone" :value="mobile.value" @click="setPrice">
+                        <div class="candidates">
+                            <div class="list-group radio-list-group">
+                                <div class="list-group-item" v-for="candidate in candidates" v-bind:key="candidate.id">&nbsp;<label><input @change="incrementVotes(candidate.id)" type="radio" name="radioInput" value="candidate.desc"><span class="list-group-item-text"><i class="fa fa-fw"></i> {{ candidate.desc }}</span></label></div>
+                            </div>
                         </div>
-                        <ul class="list-group">
-                            <li v-for="candidate in candidates" v-bind:key="candidate.id" class="list-group-item">
-                                <button type="button" @click="incrementVotes(candidate.id)">{{ candidate.desc }}</button>
-                            </li>
-                        </ul>
-                    </div>
                     <!-- Our focus right now -->
                     <div class="card-body">
                         <h3 style="font-family:Lato;font-size: 15px">{{ description }}</h3>
@@ -34,11 +29,7 @@
             return {
                 description: this.poll_desc,
                 candidates: this.poll_candidates,
-                voteurs: this.poll_candidates,
                 chart: null,
-                mobile: {
-                    value: 'samsung',
-                }
             }
         },
         methods: {
@@ -66,14 +57,14 @@
               });
             },
             incrementVotes(candidate_id) {
-                alert('Hello !! Help')
-              /*axios.post('/candidates/' + candidate_id, {})
+                //alert('Hello !! Help')
+              axios.post('/candidates/' + candidate_id, {})
               .then((response) => {
                 let candidates = response.data.data
                 this.drawChart(_.map(candidates, 'desc'), _.map(candidates, 'votes_count'))
               }).catch((error) => {
                   console.error(error)
-              })*/
+              })
             }, 
             setPrice(event) {
                 console.log(event.target.value)

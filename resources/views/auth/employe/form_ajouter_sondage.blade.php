@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+{{ __('Ajouter un sondage') }}
+@endsection
+
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page_title')
-{{ __('Post du Forum') }}
+{{ __('Post') }}
 @endsection
 
 @section('scripts')

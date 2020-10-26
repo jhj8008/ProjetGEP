@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Elève;
 class Absences_retardsController extends Controller
 {
     /**
@@ -23,6 +24,13 @@ class Absences_retardsController extends Controller
      */
     public function index()
     {
-        return view('Auth\absences_retards');
+        $élèves = Elève::where('parent_id', '=', Auth::user()->id)->get();
+        return view('Auth\negligences_élèves', compact('élèves'));
+    }
+
+    public function getNegligences($élève_id){
+        $élève = Elève::find($élève_id);
+        $negligences = $élève->negligences;
+        return view('Auth\liste_negligences', compact('negligences'));
     }
 }

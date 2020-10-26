@@ -21,7 +21,7 @@ class PersonnelMiddleware
         }
 
         if(Auth::guard('employe')->check() && !Auth::guard('employe')->user()->personnel){
-            return redirect('espace_employe');
+            return redirect('espace_employe')->with('failure', 'Désolé, cet espace est réservé aux personnels uniquement');
         }
         return $next($request);
     }

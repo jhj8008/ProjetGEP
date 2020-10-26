@@ -32,7 +32,9 @@
             height: 35px;
             width: 110px;
         }
-
+        .my_footer {
+            position: absolute;
+        }
     </style>
 @endsection
 
@@ -40,25 +42,22 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="titre">
-            <h1>Espace enseignant</h1>
-        </div>
         <div class="row">
             <div class="col-sm-6 menu_item">
                 <h3>Notes et remarques<i class="fa fa-graduation-cap" aria-hidden="true"></i></h3>
-                <div class="item_desc">Ajouter des notes et des remarques pour chaque élèves<a href="{{ route('enseignants.notes_et_remarques') }}" class="btn btn-info"><span>Continuer</span></a></div>
+                <div class="item_desc">Ajouter des notes et des remarques pour chaque élèves<a href="{{ route('enseignants.notes_et_remarques') }}" class="btn btn-info float-right"><span>Continuer</span></a></div>
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Absence et retards<i class="fa fa-object-group" aria-hidden="true"></i></h3>
-                <div class="item_desc">Ajouter les absences et les retards<a href="{{ route('enseignants.absences_retards') }}" class="btn btn-info">Continuer</a> </div>
+                <div class="item_desc">Ajouter les absences et les retards<a href="{{ route('enseignants.absences_retards') }}" class="btn btn-info float-right">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Bulletins des élèves<i class="fa fa-cog" aria-hidden="true"></i></h3>
-                <div class="item_desc">Mettre en ligne les notes de vos classes<a href="{{ route('enseignants.bulletins') }}" class="btn btn-info">Continuer</a> </div>
+                <div class="item_desc">Mettre en ligne les notes de vos classes<a href="{{ route('enseignants.bulletins') }}" class="btn btn-info float-right">Continuer</a> </div>
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Saisir des cahiers de texte<i class="fa fa-address-card" aria-hidden="true"></i> </h3>
-                <div class="item_desc">Saisir les cahiers de texte de vos classes<a href="{{ route('enseignants.cahiers_texte') }}" class="btn btn-info">Continuer</a> </div>
+                <div class="item_desc">Saisir les cahiers de texte de vos classes<a href="{{ route('enseignants.cahiers_texte') }}" class="btn btn-info float-right">Continuer</a> </div>
             </div>
         </div>
     </div>

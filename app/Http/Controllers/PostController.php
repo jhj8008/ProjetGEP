@@ -70,8 +70,26 @@ class PostController extends Controller
         return view('Auth\employe\post_thread', compact('post'));
     }
 
+    public function pageAjouterPost(){
+        return view('Auth\employe\nouveau_post');
+    }
+
+    public function ajouterPost(Request $request){
+        $valid = $this->validator($request->all());
+
+        if($valid->fails()){
+            return redirect()->back()->withErrors($valid)->withInput();
+        }
+        $employe_id = Auth::guard('employe')->user()->id;
+        $parent_id = null;
+
+        $this->createPost($request->all(), $employe_id, $parent_id);
+
+        return redirect()->route('employés.forum_employe');
+    }
+
     public function ajouterCommentEmploye(Request $request, $post_id){
-        $validation = $this->validator($request->all());
+        $validation = $this->validatorComment($request->all());
 
         if($validation->fails()){
             return redirect()->back()->withErrors($validation)->withInput();
@@ -83,9 +101,25 @@ class PostController extends Controller
         return redirect()->route('employés.forum_thread', ['id' => $post_id]);
     }
 
-    protected function validator(array $data){
+    protected function validatorComment(array $data){
         return Validator::make($data, [
             'description' => ['required', 'string', 'max:255'],
+        ]);
+    }
+
+    protected function validator(array $data){
+        return Validator::make($data, [
+            'titre' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:255'],
+        ]);
+    }
+
+    protected function createPost(array $data, $employe_id, $parent_id){
+        return Post::create([
+            'titre' => $data['titre'],
+            'description' => $data['description'],
+            'employe_id' => $employe_id,
+            'elèveparent_id' => $parent_id,
         ]);
     }
 

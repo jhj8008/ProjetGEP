@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Ajouter une négligence') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('enseignants.créer_negligence', ['classe_id' => $classe_id, 'élève_id' => $élève_id]) }}">
+                    <form method="POST" action="{{ route('enseignants.créer_negligence', ['classe_id' => $classe_id, 'id' => $élève_id]) }}">
                         @csrf
                         <div class="form-group row">
                             <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Type de négligence') }}</label>
@@ -96,8 +96,12 @@
                             <label for="séance" class="col-md-4 col-form-label text-md-right">{{ __('Séance') }}</label>
 
                             <div class="col-md-6">
-                                <input id="séance" type="text" class="form-control @error('séance') is-invalid @enderror" name="séance" required>
-
+                                <!--<input id="séance" type="text" class="form-control @error('séance') is-invalid @enderror" name="séance" required>-->
+                                <select id="séance" name="séance" class="form-control @error('séance') is-invalid @enderror">
+                                    @foreach(Auth::guard('employe')->user()->matières as $matière)
+                                        <option value="{{ $matière->id }}">{{ $matière->nom }}</option>
+                                    @endforeach
+                                </select>
                                 @error('séance')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

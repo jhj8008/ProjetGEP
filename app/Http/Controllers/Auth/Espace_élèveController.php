@@ -25,4 +25,5 @@ class Espace_élèveController extends Controller
     {
         return view('Auth\espace_élève');
     }
+
 }

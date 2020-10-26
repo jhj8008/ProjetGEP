@@ -37,6 +37,9 @@
             width: 110px;
         }
 
+        .my_footer {
+            position: absolute;
+        }
     </style>
 @endsection
 
@@ -44,9 +47,16 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="titre">
-            <h1>Espace employé</h1>
-        </div>
+        @if($message = Session::get('failure'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ $message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+    </div>
+    <div class="row justify-content-center">
         <div class="row">
             <div class="col-sm-6 menu_item">
                 <h3>Espace de l'enseignant<i class="fa fa-graduation-cap" aria-hidden="true"></i></h3>
@@ -67,10 +77,6 @@
             <div class="col-sm-6 menu_item">
                 <h3>Forum<i class="fa fa-globe" aria-hidden="true"></i></h3>
                 <div class="item_desc">Accéder aux forum des employées <a href="{{ route('employés.forum_employe') }}" class="btn btn-info float-right">Continuer</a> </div>
-            </div>
-            <div class="col-sm-6 menu_item">
-                <h3>Notifications<i class="fa fa-bell" aria-hidden="true"></i></h3>
-                <div class="item_desc">Accéder à tous vos notifications<a href="#" class="btn btn-info float-right">Continuer</a> </div>
             </div>
         </div>
     </div>

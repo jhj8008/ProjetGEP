@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,22 +28,27 @@ Route::get('admin', function(){
     echo 'You are an Admin';
 })->middleware('admin');
 
+Route::get('send-notification', 'NotificationController@sendOfferNotification')->name('send_notif');
+
 // Welcome page controllers
 Route::name('parents.')->group(function(){
     Route::get('forum', 'Auth\ForumController@index')->name('forum');
+    Route::get('forum/get_posts/', 'Auth\ForumController@getPosts')->name('getPosts');
+    Route::get('forum/post_thread/{id}', 'Auth\ForumController@getPostThread')->name('post_thread');
+    Route::post('forum/post_thread/{id}/ajouter_commentaire', 'Auth\ForumController@ajouterCommentaire')->name('ajouter_commentaire');
+    Route::get('forum/form_ajouter_post', 'Auth\ForumController@pageAjouterPost')->name('form_ajouter_post');
+    Route::post('forum/ajouter_post', 'Auth\ForumController@ajouterPost')->name('ajouter_post');
     Route::get('espace_élève', 'Auth\Espace_élèveController@index')->name('espace_élève');    
     Route::get('absences_retards', 'Auth\Absences_retardsController@index')->name('absences_retards');
+    Route::get('absence_retards/liste_negligences/{id}', 'Auth\Absences_retardsController@getNegligences')->name('get_negligences');
     Route::get('notes', 'Auth\NotesController@index')->name('notes');
-    Route::get('notifications', 'Auth\NotificationsController@index')->name('notifications');
-    Route::get('espace_élève/bulletins', function(){
-        return view('bulletins');
-    })->name('bulletins');
-    Route::get('espace_élève/cahiers_de_texte', function(){
-        return view('cahiers_de_texte');
-    })->name('cahiers_de_texte');
-    Route::get('espace_élève/emplois_du_temps', function(){
-        return view('emplois_du_temps');
-    })->name('emplois_du_temps');
+    Route::get('notes/get_notes/{id}', 'Auth\NotesController@getNotes')->name('get_notes');
+    /*Route::get('notifications', 'Auth\NotificationsController@index')->name('notifications');*/
+    Route::get('espace_élève/cahiers_de_texte', 'Auth\CahiersTexteController@index')->name('cahiers_de_texte');
+    Route::get('espace_élève/cahiers_de_texte/matières_élève/{id}/cahier_texte/', 'Auth\CahiersTexteController@getCahierTexte')->name('cahier_texte');
+    Route::get('espace_élève/emplois_du_temps', 'Auth\EmploiTempsController@index')->name('emplois_du_temps');
+    Route::get('espace_élève/emplois_du_temps/{id}', 'Auth\EmploiTempsController@getEmploiTemps')->name('emploi_temps');
+    Route::get('espace_élève/emplois_du_temps/{id}/séances_jour/{jour}', 'Auth\EmploiTempsController@getSéances')->name('séances');
     Route::get('espace_élève/liste_élèves', 'ListeElèveController@index')->name('liste_élèves');
     Route::get('espace_élève/inscription', 'Auth\InscriptionController@index')->name('inscription');
     Route::post('espace_élève/inscription', 'Auth\InscriptionController@inscrire');
@@ -50,7 +56,11 @@ Route::name('parents.')->group(function(){
 
 Route::name('clients.')->group(function(){
     Route::get('actualités', 'ActualitésController@index')->name('actualités');
+    Route::get('actualités/{type}', 'ActualitésController@getAllArticles')->name('liste_actualités');
+    Route::get('actualités/{type}/article/{id}', 'ActualitésController@getArticleDetails')->name('actualité_details');
     Route::get('activités', 'ActivitésController@index')->name('activités');
+    Route::get('activités/{type}', 'ActivitésController@getAllArticles')->name('liste_activités');
+    Route::get('activités/{type}/activité/{id}', 'ActivitésController@getArticleDetails')->name('activité_details');
     Route::get('à_propos', 'À_proposController@index')->name('à_propos');
     Route::get('contact', 'ContactController@index')->name('contact');
     Route::post('contacter', 'ContactController@envoyerMessage')->name('contacter');
@@ -67,7 +77,7 @@ Route::name('enseignants.')->group(function(){
     Route::post('espace_employe/espace_enseignant/absences_retards/liste_absence/{classe_id}/profile_absence/{élève_id}/ouvrir_negligence/modifier_negligence/{id}', 'AbsencesRetardsElèveController@modifierNegligence')->name('modifier_negligence');
     Route::get('espace_employe/espace_enseignant/absences_retards/liste_absence/{classe_id}/profile_absence/{élève_id}/ouvrir_negligence/supprimer_negligence/{id}', 'AbsencesRetardsElèveController@supprimerNegligence')->name('supprimer_negligence');
     Route::get('espace_employe/espace_enseignant/absences_retards/liste_absence/{classe_id}/profile_absence/{id}/formulaire_negligence/', 'AbsencesRetardsElèveController@PageAjouterNegligence')->name('ajouter_negligence');
-    Route::post('espace_employe/espace_enseignant/absences_retards/liste_absence/{classe_id}/profile_absence/{élève_id}/formulaire_negligence/ajouter_negligence/', 'AbsencesRetardsElèveController@ajouterNegligence')->name('créer_negligence');
+    Route::post('ajouter_negligence/{classe_id}/profile_absence/{id}/', 'AbsencesRetardsElèveController@ajouterNegligence')->name('créer_negligence');
 
     // Gestion des notes des élèves
     Route::get('espace_employe/espace_enseignant/notes_et_remarques', 'GestionNotesController@index')->name('notes_et_remarques');
@@ -95,6 +105,37 @@ Route::name('enseignants.')->group(function(){
 
 Route::name('admins.')->group(function(){
     Route::get('espace_employe/espace_admin', 'EspaceAdminController@index')->name('espace_admin');
+    Route::get('espace_employe/gestion_personnel', 'GestionComptePersonnelController@index')->name('gestion_personnel');
+    Route::get('espace_employe/boite_reception', 'BoiteReceptionController@index')->name('boite_reception');
+    Route::get('espace_employe/boite_reception/voir_message/{id}', 'BoiteReceptionController@getMessage')->name('voir_message');
+    Route::get('espace_employe/boite_reception/supprimer_message/{id}', 'BoiteReceptionController@supprimerMessage')->name('supprimer_message');
+    Route::post('espace_employe/boite_reception/envoyer_message', 'BoiteReceptionController@mail')->name('envoyer_email');
+    Route::get('espace_employe/boite_reception/nouveau_email', 'BoiteReceptionController@getPageNouveauEmail')->name('nouveau_email');
+    Route::get('espace_employe/gestion_personnel/comptes_personnels', 'GestionComptePersonnelController@getListePersonnels')->name('comptes_personnels');
+    Route::get('espace_employe/gestion_personnel/comptes_personnels/form_ajouter_personnel', 'GestionComptePersonnelController@pageFormAjouterPersonnel')->name('form_ajouter_personnel');
+    Route::get('espace_employe/gestion_personnel/comptes_personnels/form_modifier_personnel/{id}/', 'GestionComptePersonnelController@pageFormModifierPersonnel')->name('form_modifier_personnel');
+    Route::post('espace_employe/gestion_personnel/comptes_personnels/form_ajouter_personnel/ajouter_personnel', 'GestionComptePersonnelController@ajouterPersonnel')->name('ajouter_personnel');
+    Route::get('espace_employe/gestion_personnel/comptes_personnels/supprimer_personnel/{id}', 'GestionComptePersonnelController@supprimerPersonnel')->name('supprimer_personnel');
+    Route::post('espace_employe/gestion_personnel/comptes_personnels/form_modifier_personnel/modifier_personnel/{id}', 'GestionComptePersonnelController@modifierPersonnel')->name('modifier_personnel');
+
+    Route::get('espace_employe/gestion_personnel/gestion_fiches_personnelles', 'GestionFichePersonnelleController@index')->name('gestion_fiches_personnelles');
+    Route::get('espace_employe/gestion_personnel/gestion_fiches_personnelles/fiche_personnelle/{id}', 'GestionFichePersonnelleController@getFichePersonnelle')->name('voir_fiche_personnelle');
+    Route::get('espace_employe/gestion_personnel/gestion_fiches_personnelles/fiche_personnelle/{id}/form_modifier_fiche/', 'GestionFichePersonnelleController@getFormModifierFiche')->name('form_modifier_fiche');
+    Route::post('espace_employe/gestion_personnel/gestion_fiches_personnelles/fiche_personnelle/{id}/form_modifier_fiche/modifier_fiche', 'GestionFichePersonnelleController@modifierFiche')->name('modifier_fiche');
+
+    Route::get('espace_employe/espace_admin/gestion_admin', 'GestionCompteAdminController@index')->name('gestion_admin');
+    Route::get('espace_employe/espace_admin/gestion_admin/comptes_admins', 'GestionCompteAdminController@getListeAdmins')->name('comptes_admins');
+    Route::get('espace_employe/espace_admin/gestion_admin/gestion_fiches_admins', 'GestionCompteAdminController@getFichesAdmins')->name('gestion_fiches_admins');
+    Route::get('espace_employe/espace_admin/gestion_admin/form_ajouter_admin', 'GestionCompteAdminController@getPageAjouterAdmin')->name('form_ajouter_admin');
+    Route::get('espace_employe/espace_admin/gestion_admin/form_modifier_admin/{id}', 'GestionCompteAdminController@getPageModifierAdmin')->name('form_modifier_admin');
+    Route::post('espace_employe/espace_admin/gestion_admin/form_ajouter_admin/ajouter_admin', 'GestionCompteAdminController@ajouterAdmin')->name('ajouter_admin');
+    Route::post('espace_employe/espace_admin/gestion_admin/form_modifier_admin/{id}/modifier_admin', 'GestionCompteAdminController@modifierAdmin')->name('modifier_admin');
+    Route::get('espace_employe/espace_admin/gestion_admin/supprimer_admin/{id}', 'GestionCompteAdminController@supprimerAdmin')->name('supprimer_admin');
+
+    Route::get('espace_employe/espace_admin/gestion_fiches_admins', 'GestionCompteAdminController@getFichesAdmin')->name('gestion_fiches_admins');
+    Route::get('espace_employe/espace_admin/gestion_fiches_admins/voir_fiche_admin/{id}', 'GestionCompteAdminController@getFichePersonnelle')->name('voir_fiche_admin');
+    Route::get('espace_employe/espace_admin/gestion_fiches_admins/voir_fiche_admin/{id}/form_modifier_fiche_admin/', 'GestionCompteAdminController@pageModifierFicheAdmin')->name('form_modifier_fiche_admin');
+    Route::post('espace_employe/espace_admin/gestion_fiches_admins/voir_fiche_admin/{id}/form_modifier_fiche_admin/modifier_fiche_admin', 'GestionCompteAdminController@modifier_fiche')->name('modifier_fiche_admin');
 });
 
 Route::name('employés.')->group(function(){
@@ -116,6 +157,9 @@ Route::name('employés.')->group(function(){
 
     Route::get('forum/liste_sondages/form_ajouter_sondage', 'VoteController@pageFormAjouterSondage')->name('form_ajouter_sondage');
     Route::post('forum/liste_sondages/form_ajouter_sondage/ajouter_sondage', 'VoteController@ajouterSondage')->name('ajouter_sondage');
+
+    Route::get('espace_employe/forum/page_ajouter_post/', 'PostController@pageAjouterPost')->name('page_ajouter_post');
+    Route::post('post/ajouter_post', 'PostController@ajouterPost')->name('ajouter_post');
 });
 
 Route::name('personnels.')->group(function(){
@@ -211,30 +255,31 @@ Route::get('my_page', function(){
     ]);*/
     /*\App\Fiche_personnelle::create([
         'nationalité' => 'Marocaine',
-        'num_carte_sejour' => '147855369', 
-        'num_carte_travail' => '874599321', 
+        'num_carte_sejour' => '207855369', 
+        'num_carte_travail' => '874599318', 
         'situation_familiale' => 'Marié', 
-        'num_sécurité_sociale' => '661250250', 
-        'code_postale' => '40000', 
+        'num_sécurité_sociale' => '661250244', 
+        'code_postale' => '40410', 
         'ville' => 'Marrakech', 
-        'qualification' => 'Diplôme master en liérature française', 
+        'qualification' => 'Diplôme master en science pédagogiques', 
         'contrat' => 'CDD', 
-        'durée' => '4 mois', 
-        'salaire_mensuel' => '7800', 
-        'date_entrée' => date('Y-m-d',strtotime('2016-09-02')), 
-        'date_sortie' => date('Y-m-d',strtotime('2021-08-22')), 
+        'durée' => '5 mois', 
+        'salaire_mensuel' => '9800', 
+        'date_entrée' => date('Y-m-d',strtotime('2015-09-02')), 
+        'date_sortie' => date('Y-m-d',strtotime('2020-09-02')), 
         'situation_avant_enbauche' => 'Étudiant', 
-        'employe_id' => 3,
+        'employe_id' => 1,
     ]);*/
 
-    \App\Comment::create([
+    /*\App\Comment::create([
         'description' => "Je pense que c'est lundi prochain, inchallah",
         'post_id' => 1,
         'employe_id' => 2,
         'elèveparent_id' => 0, 
     ]);
 
-    echo '<h1>Comment created 1</h1>';
+    echo '<h1>Comment created 1</h1>';*/
+    echo '<h2>espace employé link:</h2><p>' . url('/absences_retards') . '</p>';
 });
 
 /*

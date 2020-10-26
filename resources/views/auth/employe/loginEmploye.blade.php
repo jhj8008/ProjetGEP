@@ -1,5 +1,17 @@
 @extends('layouts.admin')
 
+@section('page_title')
+{{ __('Login des employés') }}
+@endsection
+
+@section('styles')
+<style>
+    .my_footer {
+        position: absolute;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

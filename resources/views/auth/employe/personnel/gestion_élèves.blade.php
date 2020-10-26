@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+{{ __('Gestion des élèves') }}
+@endsection
+
 @section('scripts')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="htt^s://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
@@ -14,7 +18,8 @@
         $('#liste_élèves').DataTable({
             "lengthChange": false,
             "ordering": true,
-            "pageLength": 10,
+            "pageLength": 5,
+            saveState: true,
             "language": {
                 "search": "Chercher: ",
                 "emptyTable": "Aucun résultat",
@@ -71,6 +76,10 @@
     }
     h5 > i{
         font-size: 20px;
+    }
+
+    .my_footer {
+        position: absolute;
     }
 </style>
 

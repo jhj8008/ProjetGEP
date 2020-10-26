@@ -159,6 +159,10 @@
         font-size: 16px;
         color: #BBB;
     }
+
+    .my_footer {
+        
+    }
 </style>
 @endsection
 
@@ -166,7 +170,7 @@
 <div class="container">
     <div class="row justify-content-center" id="list_posts">
         <div class="row float-left action-btns">
-            <a href="#" class="btn btn-primary a-btn-slide-text">
+            <a href="{{ route('employés.page_ajouter_post') }}" class="btn btn-primary a-btn-slide-text">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 <span><strong>Ajouter un post</strong></span>            
             </a>

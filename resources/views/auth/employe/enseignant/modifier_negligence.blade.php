@@ -98,8 +98,12 @@
                             <label for="séance" class="col-md-4 col-form-label text-md-right">{{ __('Séance') }}</label>
 
                             <div class="col-md-6">
-                                <input id="séance" type="text" class="form-control @error('séance') is-invalid @enderror" value="{{ $negligence->matière->nom }}" name="séance" required>
-
+                                <!--<input id="séance" type="text" class="form-control @error('séance') is-invalid @enderror" value="{{ $negligence->matière->nom }}" name="séance" required>-->
+                                <select id="séance" name="séance" class="form-control @error('séance') is-invalid @enderror">
+                                    @foreach(Auth::guard('employe')->user()->matières as $matière)
+                                        <option value="{{ $matière->id }}" @if($negligence->matière_id == $matière->id) selected @endif>{{ $matière->nom }}</option>
+                                    @endforeach
+                                </select>
                                 @error('séance')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

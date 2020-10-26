@@ -15,6 +15,7 @@
             "lengthChange": false,
             "ordering": true,
             "pageLength": 5,
+            stateSave: true,
             "language": {
                 "search": "Chercher: ",
                 "searchPlaceholder": "Saisir un mot clé...",
@@ -311,12 +312,12 @@ h5 > i{
                 <tbody>
                     @foreach($élève->negligences as $negligence)
                         <tr>
-                            <td>{{ $negligence->type }}</td>
-                            <td>{{ $negligence->date }}</td>
-                            <td>{{ $negligence->durée }}</td>
-                            <td>{{ $negligence->période }}</td>
-                            <td>{{ $negligence->matière->nom }}</td>
-                            <td>{{ $negligence->raison }}</td>
+                            <td class="align-middle">{{ $negligence->type }}</td>
+                            <td class="align-middle">{{ $negligence->date }}</td>
+                            <td class="align-middle">{{ $negligence->durée }}</td>
+                            <td class="align-middle">{{ $negligence->période }}</td>
+                            <td class="align-middle">{{ $negligence->matière->nom }}</td>
+                            <td class="align-middle">{{ $negligence->raison }}</td>
                             <td>
                                 <ul class="list-inline m-0">
                                     <li class="list-inline-item">

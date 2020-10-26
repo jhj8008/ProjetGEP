@@ -10,6 +10,7 @@ use App\Elèveparent;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\NotificationController;
 
 class InscriptionController extends Controller
 {
@@ -87,7 +88,20 @@ class InscriptionController extends Controller
 
         $user->newSubscription('main', $planId)->create($paymentMethod);
         
-        $this->create($persisted_data);
+        $élève = $this->create($persisted_data);
+
+        $notif_cont = new NotificationController();
+        $notifData = [
+            'name' => 'GEP',
+            'body' => 'Félicitation vous avez réussi à inscrire de votre enfant, ' . $élève->nom . ' ' . $élève->prénom . ' en ligne.',
+            'thanks' => 'Cordialement',
+            'notifText' => 'Accèder à l\'espace des élèves',
+            'notifUrl' => url('/espace_élève'),
+            'notif_id' => 007
+        ];
+
+        $notif_cont->sendParentNotification($notifData, $élève->parent_id);
+
         return redirect()->route('espace_élève');
      }
     protected function validator(array $data){

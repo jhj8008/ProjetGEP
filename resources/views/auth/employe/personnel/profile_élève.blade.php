@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+{{ __('Profile élève') }}
+@endsection
+
 @section('styles')
 <style>
 .padding {

@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+{{ __('Liste des notes') }}
+@endsection
+
 @section('scripts')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="htt^s://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
@@ -65,6 +69,10 @@
         font-family: 'Lato', sans-serif;
         font-weight: bold;
     }
+
+    .my_footer {
+        position: absolute;
+    }
 </style>
 
 @endsection
@@ -74,7 +82,7 @@
     <div class="row justify-content-center">
         <h1 class="title">Liste des notes des élèves</h1>
         <div class="container mb-3 mt-3">
-            <table id="liste_élèves" class="table table-striped table-bordered dt-responsive nowrap hover" cellspacing="0" style="width:100%">
+            <table id="liste_élèves" class="table table-hover table-bordered dt-responsive nowrap hover" cellspacing="0" style="width:100%">
                 <thead>
                     <tr>
                         <th>Nom élève</th>
@@ -87,10 +95,10 @@
                 <tbody>
                     @foreach($notes as $note)
                             <tr>
-                                <td><strong style="color:#557A95;">{{ $note->elève->nom }}, {{ $note->elève->prénom }}</strong></td>
-                                <td class="nbrs">{{ $note->valeur }}</td>
-                                <td class="nbrs">{{ $note->valeur2 }}</td>
-                                <td>{{ $note->remarque }}</td>
+                                <td class="align-middle"><strong style="color:#557A95;">{{ $note->elève->nom }}, {{ $note->elève->prénom }}</strong></td>
+                                <td class="nbrs align-middle">{{ $note->valeur }}</td>
+                                <td class="nbrs align-middle">{{ $note->valeur2 }}</td>
+                                <td class="align-middle">{{ $note->remarque }}</td>
                                 <td>
                                     <a href="{{ route('enseignants.page_note_élève', ['note_id' => $note->id,'id' => $note->matière_id]) }}" class="btn btn-secondary">{{ __('Modifier') }}</a>
                                 </td>

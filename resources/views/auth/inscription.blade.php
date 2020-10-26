@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page_title')
+{{ __('Inscription') }}
+@endsection
+
 @section('scripts')
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript" src="https://js.stripe.com/v3/"></script>

@@ -22,6 +22,27 @@
                 margin: 0;
             }
 
+               /* width */
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1; 
+            }
+            
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+                background: #888; 
+                border-radius:5px;
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555; 
+            }
+
             .full-height {
                 /*height: 100vh;*/
             }
@@ -183,7 +204,6 @@
                     <a class="my_link" href="{{ route('parents.absences_retards') }}">Absences & Retards</a>
                     <a class="my_link" href="{{ route('parents.notes') }}">Notes</a>
                     <a class="my_link" href="{{ route('clients.activités') }}">Activités</a>
-                    <a class="my_link" href="{{ route('parents.notifications') }}">Notifications</a>
                     <a class="my_link" href="{{ route('employés.espace_employe') }}">Espace employé</a>
                     <a class="my_link" href="{{ route('clients.à_propos') }}">À propos</a>
                     <a class="my_link" href="{{ route('clients.contact') }}">Contact</a>

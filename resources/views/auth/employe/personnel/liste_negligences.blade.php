@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page_title')
- {{ __('Emplois du temps') }}
+ {{ __('Liste des absences et retards') }}
 @endsection
 
 @section('scripts')
@@ -18,7 +18,8 @@
         $('#liste_negligences').DataTable({
             "lengthChange": false,
             "ordering": true,
-            "pageLength": 10,
+            "pageLength": 5,
+            saveState: true,
             "language": {
                 "search": "Chercher: ",
                 "emptyTable": "Aucun résultat",
@@ -95,6 +96,10 @@
         -webkit-transition-duration: 0.5s;
         -moz-transition-duration: 0.5s;
         -o-transition-duration: 0.5s;
+    }
+
+    .my_footer {
+        position: absolute;
     }
 </style>
 

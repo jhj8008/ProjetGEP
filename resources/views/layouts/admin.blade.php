@@ -22,8 +22,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ URL::asset('imgs/school.png') }}" type="image/x-icon"/>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
-    <script defer src="{{ mix('js/app.js') }}"></script>
     @yield('styles')
     <style>
             /* width */
@@ -151,6 +149,18 @@
             left:100%;
             margin-top:-6px;
         }
+
+        td, th{
+            text-align: center;
+        }
+
+        th {
+            font-size: 15px;
+        }
+
+        td {
+            font-size: 13px;
+        }
     </style>
 
 </head>
@@ -178,7 +188,7 @@
                             <a class="nav-link" href="{{ route('parents.forum') }}">{{ __('Forum') }}</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="employéMenuLink" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="employéMenuLink" href="{{ route('employés.espace_employe') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ __('Menu employé') }}<span class="caret"></span>
                             </a>
 
@@ -204,9 +214,22 @@
                                         <li><a class="dropdown-item" href="{{ route('enseignants.cahiers_texte') }}"> Saisir des cahiers de texte </a></li>
                                     </ul>
                                 </li>
-                                <li><a class="dropdown-item" href="{{ route('admins.espace_admin') }}"> Espace admin </a></li>
-                                <li><a class="dropdown-item" href="#"> Fiche personnelle </a></li>
-                                <li><a class="dropdown-item" href="#"> Notifications </a></li>
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item dropdown-toggle" href="{{ route('admins.espace_admin') }}"> Espace admin </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{ route('admins.boite_reception') }}"> Boîte de récéption </a></li>
+                                        <li>
+                                            <li class="dropdown-submenu">
+                                                <a class="dropdown-item dropdown-toggle" href="{{ route('admins.gestion_personnel') }}"> Gestion du personnel </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="{{ route('admins.comptes_personnels') }}"> Gestion des comptes du personnel </a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('admins.gestion_fiches_personnelles') }}"> Gestion des fiches personnelles </a></li>
+                                                </ul>
+                                            </li>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="dropdown-item" href="{{ route('employés.get_fiche_personnelle') }}"> Fiche personnelle </a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -214,9 +237,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('clients.activités') }}">{{ __('Activités') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('parents.notifications') }}">{{ __('Notifications') }}</a>
                         </li>
                         @guest('employe')
                             <li class="nav-item">

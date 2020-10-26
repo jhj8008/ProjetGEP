@@ -29,6 +29,6 @@ class Classe extends Model
     }
 
     public function emploi_temp(){
-        return $this->hasOn('App\Emploi_temp');
+        return $this->hasOne('App\Emploi_temp');
     }
 }

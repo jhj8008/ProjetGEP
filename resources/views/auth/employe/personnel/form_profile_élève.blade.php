@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+{{ __('Modifier profile élève') }}
+@endsection
+
 @section('styles')
 <style>
     .title{

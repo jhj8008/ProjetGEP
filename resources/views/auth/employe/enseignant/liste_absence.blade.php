@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+{{ __('Liste des absences') }}
+@endsection
+
 @section('scripts')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="htt^s://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
@@ -15,6 +19,7 @@
             "lengthChange": false,
             "ordering": true,
             "pageLength": 5,
+            stateSave: true,
             "language": {
                 "search": "Chercher: ",
                 "searchPlaceholder": "Saisir un mot clé...",
@@ -64,6 +69,10 @@
         font-family: 'Lato', sans-serif;
         font-weight: bold;
     }
+
+    .my_footer {
+        position: absolute;
+    }
 </style>
 
 @endsection
@@ -71,9 +80,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="title">Liste des élèves</h1>
         <div class="container mb-3 mt-3">
-            <table id="liste_élèves" class="table table-striped table-bordered dt-responsive nowrap hover" cellspacing="0" style="width:100%">
+            <table id="liste_élèves" class="table table-hover table-bordered dt-responsive nowrap hover" cellspacing="0" style="width:100%">
                 <thead>
                     <tr>
                         <th>Nom élève</th>
@@ -85,9 +93,9 @@
                 <tbody>
                     @foreach($élèves as $élève)
                         <tr>
-                            <td><strong style="color:#557A95;">{{ $élève->nom }}, {{ $élève->prénom }}</strong></td>
-                            <td title="Sexe">{{ $élève->sexe }}</td>
-                            <td class="nbrs">
+                            <td class="align-middle"><strong style="color:#557A95;">{{ $élève->nom }}, {{ $élève->prénom }}</strong></td>
+                            <td title="Sexe" class="align-middle">{{ $élève->sexe }}</td>
+                            <td class="nbrs align-middle">
                                 @if(count($élève->negligences) > 0) 
                                     {{ count($élève->negligences) }}
                                 @else  

@@ -5,12 +5,13 @@
                 <div class="card card-default">
                     <div class="card-header">Votes</div>
                     <div class="candidates">
-                        <ul>
-                            <li v-for="(candidate, index) in candidates" :key="index"><button @click="incrementVotes(candidate.id)">{{ candidate.desc }}</button></li>
-                        </ul>
+                      <!-- Buttons to cast votes will go in here -->
+                      <button type="button" class="btn btn-secondary" @click="counter += 1">Click here</button>
+                      <h3 style="font-family:Lato;font-size: 15px">You clicked {{ counter }} times</h3>
                     </div>
+                    
+                    <!-- Our focus right now -->
                     <div class="card-body">
-                        <h3 style="font-family:Lato;font-size: 15px">{{ description }}</h3>
                         <canvas id="myChart"></canvas>
                     </div>
                 </div>
@@ -24,24 +25,23 @@
     import _ from "lodash";
 
     export default {
-        props: ['poll_id', 'poll_desc'],
         data() {
             return {
-                description: this.poll_desc, 
+                counter: 0,
                 candidates: [],
                 chart: null,
             }
         },
         methods: {
-            drawChart(descs, votes) {
+            drawChart() {
               let ctx = document.getElementById("myChart");
               this.chart = new Chart(ctx, {
                   type: 'bar',
                   data: {
-                      labels: descs,
+                      labels: ['candidate 1', 'Candidate 2'],
                       datasets: [{
                           label: '# of Votes',
-                          data: votes,
+                          data: [5, 8],
                           borderWidth: 1
                       }]
                   },
@@ -55,28 +55,13 @@
                     }
                   }
               });
-            }, 
-            incrementVotes(candidate_id) {
-                axios.post('/candidates/' + candidate_id, {})
-                .then((response) => {
-                    let candidates = response.data.data
-                    this.drawChart(_.map(candidates, 'desc'), _.map(candidates, 'votes_count'))
-                }).catch((error) => {
-                    console.error(error)
-                })
+            },
+            increment(){
+                alert('Hello there');
             }
         },
         mounted() {
             this.drawChart()
-        },
-        created() {
-            axios.get('/polls/' + this.poll_id)
-            .then((response) => {
-                this.candidates = response.data.data;
-                this.drawChart(_.map(this.candidates, 'desc'), _.map(this.candidates, 'votes_count'))
-            }).catch((error) => {
-                console.error(error)
-            })
-        },
+        }
     }
 </script>

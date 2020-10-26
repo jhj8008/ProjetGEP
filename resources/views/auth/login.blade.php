@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page_title')
+{{ __('Login') }}
+@endsection
+
 @section('styles')
     <style>
         .my_footer{

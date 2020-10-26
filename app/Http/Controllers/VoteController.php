@@ -14,13 +14,14 @@ class VoteController extends Controller
         $polls = \App\Poll::whereHas('employes', function($q){
             $q->whereNotNull('employe_id');
         })->get();
+        //$first = $polls[0];
         return view('Auth\employe\liste_sondages', compact('polls'));
     }
-    public function incrementVotes($candidate_id){
-        $candidate = Candidate::find($candidate_id);
-        //$candidate->increment('votes_count');
-        $candidate->vote_count++;
-        $candidate->save();
+    public function incrementVotes(Candidate $candidate){
+        //$candidate = Candidate::find($candidate_id);
+        $candidate->increment('votes_count');
+        /*$candidate->vote_count++;
+        $candidate->save();*/
         //broadcast(new IncrementVotes($this->candidates()))->toOthers();
         return $this->candidates($candidate->poll_id);
     }

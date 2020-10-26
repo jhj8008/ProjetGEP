@@ -21,7 +21,7 @@ class EnseignantMiddleware
         }
 
         if(Auth::guard('employe')->check() && !Auth::guard('employe')->user()->enseignant){
-            return redirect('espace_employe');
+            return redirect('espace_employe')->with('failure', 'Désolé, cet espace est réservé aux enseignants uniquement');
         }
         return $next($request);
     }

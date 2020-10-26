@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\NotificationController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -55,6 +57,7 @@ class AbsencesRetardsElèveController extends Controller
     }
 
     public function PageAjouterNegligence($classe_id,$élève_id){
+        /*$matières = Auth::guard('employe')->user()->matières;*/
         return view('Auth\employe\enseignant\ajouter_negligence', compact(['classe_id','élève_id']));
     }
 
@@ -63,9 +66,23 @@ class AbsencesRetardsElèveController extends Controller
         if($validation->fails()){
             return redirect()->back()->withErrors($validation)->withInput();
         }
-        $neg = $this->createNegligence($request->all());
+        $neg = $this->createNegligence($request->all(), $élève_id);
         /*$elève_id = $request->all()['elève_id'];*/
-        return redirect()->route('enseignants.profile_absence', ['classe_id' => $classe_id,'élève_id' => $élève_id, 'id' => $neg->id]);
+
+        $élève = \App\Elève::find($élève_id);
+        $notif_cont = new NotificationController();
+        $notifData = [
+            'name' => 'GEP',
+            'body' => 'Un(e) ' . $neg->type . ' a été noté pour votre enfant ' . $élève->nom . ' ' . $élève->prénom . ' le: ' . $neg->date,
+            'thanks' => 'Cordialement',
+            'notifText' => 'Accèder aux absences et retards',
+            'notifUrl' => url('/absences_retards'),
+            'notif_id' => 007
+        ];
+
+        $notif_cont->sendParentNotification($notifData, $élève->parent_id);
+
+        return redirect()->route('enseignants.profile_absence', ['classe_id' => $classe_id,'id' => $élève_id]);
     }
 
     protected function validator(array $data){
@@ -79,8 +96,8 @@ class AbsencesRetardsElèveController extends Controller
         ]);
     }
 
-    protected function createNegligence(array $data){
-        $matière = \App\Matière::select("*")->where('nom', 'like', $data['séance'])->get();
+    protected function createNegligence(array $data, $elève_id){
+        //$matière = \App\Matière::select("*")->where('nom', 'like', $data['séance'])->get();
         return Negligence::create([
             'type' => $data['type'],
             'date' => date('Y-m-d',strtotime($data['date'])),
@@ -88,8 +105,8 @@ class AbsencesRetardsElèveController extends Controller
             'période' => $data['période'],
             'raison' => $data['raison'],
             'employe_id' => Auth::guard('employe')->user()->id,
-            'elève_id' => $data['elève_id'],
-            'matière_id' => $matière[0]->id,
+            'elève_id' => $elève_id,
+            'matière_id' => $data['séance'],//$matière[0]->id,
         ]);
     }
 
@@ -102,9 +119,9 @@ class AbsencesRetardsElèveController extends Controller
         $negligence->raison = $data['raison'];
 
         $élève = \App\Elève::find($negligence->elève_id);
-        $matière = \App\Matière::select("*")->where('nom', 'like', $data['séance'])->get();
+        //$matière = \App\Matière::select("*")->where('nom', 'like', $data['séance'])->get();
 
-        $negligence->matière_id = $matière[0]->id;
+        $negligence->matière_id = $data['séance'];//$matière[0]->id;
 
         $negligence->save();
         /*return $negligence->elève_id;*/

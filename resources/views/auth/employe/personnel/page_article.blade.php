@@ -1,4 +1,8 @@
-@extends('layouts.admin')
+@if(Auth::guard('employe')->check())
+    @extends('layouts.admin')
+@else
+    @extends('layouts.app')
+@endif
 
 @section('page_title')
     {{ __('Page article') }}

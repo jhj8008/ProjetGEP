@@ -18,7 +18,8 @@
         $('#liste_élèves').DataTable({
             "lengthChange": false,
             "ordering": true,
-            "pageLength": 10,
+            "pageLength": 5,
+            stateSave: true,
             "language": {
                 "search": "Chercher: ",
                 "emptyTable": "Aucun résultat",
@@ -76,6 +77,10 @@
     h5 > i{
         font-size: 20px;
     }
+
+    .my_footer {
+        position: absolute;
+    }
 </style>
 
 @endsection
@@ -83,7 +88,6 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="title">Liste des emplois du temps</h1>
         <div class="container mb-3 mt-3">
             <table id="liste_élèves" class="table table-dark table-hover dt-responsive" cellspacing="0" style="width:100%">
                 <thead>

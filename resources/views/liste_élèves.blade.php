@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page_title')
+{{ __('Liste des élèves') }}
+@endsection
+
 @section('scripts')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="htt^s://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
@@ -15,6 +19,7 @@
             "lengthChange": false,
             "ordering": true,
             "pageLength": 5,
+            stateSave: true,
             "language": {
                 "search": "Chercher: ",
                 "emptyTable": "Aucun résultat",
@@ -63,6 +68,10 @@
         /*width: 70px;
         height: 80px;*/
     }
+
+    .my_footer {
+        position: absolute;
+    }
 </style>
 
 @endsection
@@ -70,9 +79,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="title">Liste des élèves</h1>
         <div class="container mb-3 mt-3">
-            <table id="liste_élèves" class="table table-striped table-bordered dt-responsive nowrap hover" cellspacing="0" style="width:100%">
+            <table id="liste_élèves" class="table table-hover table-bordered dt-responsive nowrap hover" cellspacing="0" style="width:100%">
                 <thead>
                     <tr>
                         <th>Niveau</th>
@@ -83,8 +91,8 @@
                 <tbody>
                     @foreach($élèves as $élève)
                         <tr>
-                            <td><strong style="color:#557A95;">{{ $élève->niveau_scolaire }}</strong></td>
-                            <td>{{ $élève->nom }}, {{ $élève->prénom }}</td>
+                            <td class="align-middle"><strong style="color:#557A95;">{{ $élève->niveau_scolaire }}</strong></td>
+                            <td class="align-middle">{{ $élève->nom }}, {{ $élève->prénom }}</td>
                             <td>
                                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="{{'#exampleModalScrollable'.$élève->id}}">
                                     {{ __('Voir profile') }}

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use \App\Post;
+use \App\Comment;
 
 class EspaceEmployeController extends Controller
 {
@@ -28,8 +31,8 @@ class EspaceEmployeController extends Controller
     }
 
     public function getFichePersonnelle(){
-        /*$f_p = Auth::guard('employe')->user()->fiche_personnelle;
-        return view('Auth\employe\personnel\fiche_personnelle', compact('f_p'));*/
+        $f_p = Auth::guard('employe')->user()->fiche_personnelle;
+        return view('Auth\employe\fiche_personnelle', compact('f_p'));
     }
 
     public function getPageForum(){
@@ -37,4 +40,5 @@ class EspaceEmployeController extends Controller
         $max_pages = round(count($posts) / 4);
         return view('Auth\employe\forum', compact('max_pages'));
     }
+
 }

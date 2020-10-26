@@ -36,6 +36,9 @@
             width: 110px;
         }
 
+        .my_footer {
+            position: absolute;
+        }
     </style>
 @endsection
 
@@ -45,12 +48,16 @@
     <div class="row justify-content-center">
         <div class="row">
             <div class="col-sm-6 menu_item">
-                <h3>Gestion des rapports de bugs<i class="fa fa-graduation-cap" aria-hidden="true"></i></h3>
-                <div class="item_desc">Gérer les rapports de bug envoyés.<a href="#" class="btn btn-info float-right">Continuer</a></div>
+                <h3>Boîte de récéption<i class="fa fa-graduation-cap" aria-hidden="true"></i></h3>
+                <div class="item_desc">Gérer les messages envoyés dans la boîte de récéption.<a href="{{ route('admins.boite_reception') }}" class="btn btn-info float-right">Continuer</a></div>
             </div>
             <div class="col-sm-6 menu_item">
                 <h3>Gestion du personnel<i class="fa fa-object-group" aria-hidden="true"></i></h3>
-                <div class="item_desc">Gérer les comptes et les absences du personnel<a href="#" class="btn btn-info float-right">Continuer</a> </div>
+                <div class="item_desc">Gérer les comptes et les fiches personnelles des personnels.<a href="{{ route('admins.gestion_personnel') }}" class="btn btn-info float-right">Continuer</a> </div>
+            </div>
+            <div class="col-sm-6 menu_item">
+                <h3>Gestion des comptes admin<i class="fa fa-object-group" aria-hidden="true"></i></h3>
+                <div class="item_desc">Gérer les comptes et les fiches personnelles des admins.<a href="{{ route('admins.gestion_admin') }}" class="btn btn-info float-right">Continuer</a> </div>
             </div>
         </div>
     </div>
