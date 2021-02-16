@@ -138,6 +138,26 @@ $(function(){
         color: white;
         font-family: 'Lato';
     }
+
+    .action-btns{
+        /*position: absolute;*/
+        margin-top: 10px;
+        float:left;
+    }
+
+    .action-btns > .btn:hover {
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -o-transform: scale(1.1);
+    }
+    .action-btns > .btn {
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        -o-transform: scale(0.8);
+        -webkit-transition-duration: 0.5s;
+        -moz-transition-duration: 0.5s;
+        -o-transition-duration: 0.5s;
+    }
 </style>
 @endsection
 
@@ -148,6 +168,12 @@ $(function(){
             <h1>Thread</h1>
         </div>
     </div>
+    <div class="row float-left action-btns">
+        <a href="{{ route('employés.forum_employe') }}" class="btn btn-primary a-btn-slide-text">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            <span><strong>Retourner au forum</strong></span>            
+        </a>
+    </div>
     <div class="container-fluid mt-100 post-container">
         <div class="row">
             <div class="col-md-12">
@@ -155,11 +181,23 @@ $(function(){
                     <div class="card-header">
                         <!-- old image: https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg -->
                         <div class="media flex-wrap w-100 align-items-center"> <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="d-block ui-w-40 rounded-circle" alt="Image du profile">
-                            <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">{{ $post->employe->nom }} {{ $post->employe->prénom }}</a>
+                            <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">
+                                @if($post->elèveparent_id == null)
+                                    {{ $post->employe->nom }} {{ $post->employe->prénom }}
+                                @else
+                                    Parent ID {{ $post->elèveparent->id }}
+                                @endif
+                            </a>
                                 <div class="text-muted small">Publié le {{ $post->created_at }}, Post id: {{ $post->id }}</div>
                             </div>
                             <div class="text-muted small ml-3">
-                                <div><strong>{{ count($post->employe->posts) }}</strong> posts</div>
+                                <div><strong>
+                                @if($post->elèveparent_id == null)
+                                    {{ count($post->employe->posts) }}
+                                @else
+                                    {{ count($post->elèveparent->posts) }}
+                                @endif
+                                </strong> posts</div>
                             </div>
                         </div>
                     </div>
@@ -182,12 +220,18 @@ $(function(){
     </div>
     <div class="row justify-content-right">
         @foreach($post->comments as $comment)
-            <div class="container mt-5">
+            <div class="container">
                 <div class="comment-container d-flex justify-content-right row">
                     <div class="col-md-6">
                         <div class="bg-white comment-section">
                             <div class="d-flex flex-row user p-2"><img class="d-block ui-w-40 rounded-circle" src="https://img.icons8.com/bubbles/100/000000/user.png" width="50">
-                                <div class="d-flex flex-column ml-2"><span class="name font-weight-bold">{{ $comment->employe->nom }} {{ $comment->employe->prénom }}</span><span>Le {{ $comment->created_at }}</span></div>
+                                <div class="d-flex flex-column ml-2"><span class="name font-weight-bold">
+                                    @if($comment->elèveparent_id == null)
+                                        {{ $comment->employe->nom }} {{ $comment->employe->prénom }}
+                                    @else
+                                        Parent ID: {{ $comment->elèveparent->id }}
+                                    @endif
+                                </span><span>Le {{ $comment->created_at }}</span></div>
                             </div>
                             <div class="mt-2 p-2">
                                 <p class="comment-content">{{ $comment->description }}</p>

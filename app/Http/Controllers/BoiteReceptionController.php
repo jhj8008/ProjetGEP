@@ -61,9 +61,15 @@ class BoiteReceptionController extends Controller
     }
 
     protected function validator(array $data){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractères',
+            'email' => 'veuillez corriger votre email. Ex: xyz@abc.fr'
+        ];
         return Validator::make($data, [
             'email_to' => ['required', 'email:dns', 'max:255'],
             'message' => ['required', 'string', ]
-        ]);
+        ], $messages);
     }
 }

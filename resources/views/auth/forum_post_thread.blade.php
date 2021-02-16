@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('page_title')
 {{ __('Post du Forum') }}
@@ -64,7 +64,7 @@ $(function(){
 
 /* Post style */
     .mt-100 {
-        margin-top: 50px
+        margin-top: 50px;
     }
 
     .card {
@@ -219,7 +219,7 @@ $(function(){
             <h1>Thread</h1>
         </div>
     </div>
-    <div class="row float-left action-btns">
+    <div class="row float-right action-btns">
         <a href="{{ route('parents.forum') }}" class="btn btn-primary a-btn-slide-text">
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             <span><strong>Retourner au forum</strong></span>            
@@ -259,12 +259,18 @@ $(function(){
     </div>
     <div class="row justify-content-right">
         @foreach($post->comments as $comment)
-            <div class="container mt-5">
+            <div class="container">
                 <div class="comment-container d-flex justify-content-right row">
                     <div class="col-md-8">
                         <div class="bg-white comment-section">
                             <div class="d-flex flex-row user p-2"><img class="d-block ui-w-40 rounded-circle" src="https://img.icons8.com/bubbles/100/000000/user.png" width="50">
-                                <div class="d-flex flex-column ml-2"><span class="name font-weight-bold">Parent ID: {{ $comment->elèveparent->id }} </span><span>Le {{ $comment->created_at }}</span></div>
+                                <div class="d-flex flex-column ml-2"><span class="name font-weight-bold">
+                                @if($comment->employe_id == null)
+                                    Parent ID: {{ $comment->elèveparent->id }} 
+                                @else
+                                    {{ $comment->employe->nom }} {{ $comment->employe->prénom }}
+                                @endif
+                                </span><span>Le {{ $comment->created_at }}</span></div>
                             </div>
                             <div class="mt-2 p-2">
                                 <p class="comment-content">{{ $comment->description }}</p>
@@ -275,24 +281,23 @@ $(function(){
             </div>
         @endforeach
     </div>
-    <div class="col-md-8">
+    <div class="col-md-12">
             <div class="card">
                 <div class="card-header comment-card-header">{{ __('Commentez') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('parents.ajouter_commentaire', ['id' => $post->id]) }}">
                         @csrf
-                        <div class="form-group offset-md">
-                            <div class="col-md-12">
-                                <div class="form__group">
-                                    <textarea id="description" name="description" class="form__field" placeholder="Votre commentaire ..." rows="12">{{ old('description') }}</textarea>
-                                    <label for="description" class="form__label">Votre message</label>
-                                    @error('description')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+                        <div class="form-group">
+                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Votre commentaire') }}</label>
+                            <div class="col-md-6 offset-md-4">
+                                <textarea id="description" type="text" placeholder="Saisissez votre Commentaire ..." maxlength="255" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}"></textarea>
+                                <div class="float-left"><span id="remain">255 / 255 caractères</span></div>
+                                @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

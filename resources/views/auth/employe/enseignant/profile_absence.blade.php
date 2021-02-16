@@ -289,7 +289,7 @@ h5 > i{
         <div class="col-md-8 offset-md-4">
             <ul class="list-inline m-0">
                 <li class="list-inline-item">
-                    <a class="btn btn-primary" href="{{ route('enseignants.ajouter_negligence', ['classe_id' => $classe_id, 'id' => $élève_id]) }}">{{ __('Ajouter une négligence') }}</a>
+                    <a class="btn btn-primary" href="{{ route('enseignants.ajouter_negligence', ['classe_id' => $classe_id, 'id' => $élève_id]) }}">{{ __('Ajouter une absence / retard') }}</a>
                 </li>
                 <li class="list-inline-item">
                     <a class="btn btn-dark" href="{{ route('enseignants.liste_absence', $classe_id) }}">{{ __('Retour à la liste des élèves') }}</a>
@@ -300,7 +300,7 @@ h5 > i{
             <table id="liste_élèves" class="table table-striped table-bordered dt-responsive nowrap hover" cellspacing="0" style="width:100%">
                 <thead>
                     <tr>
-                        <th class="header-text">Type de négligence</th>
+                        <th class="header-text">Type</th>
                         <th class="header-text">Date</th>
                         <th class="header-text">Durée</th>
                         <th class="header-text">Période</th>

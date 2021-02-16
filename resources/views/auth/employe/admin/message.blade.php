@@ -105,7 +105,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email_to" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail du parent') }}</label>
+                            <label for="email_to" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
                             <div class="col-md-7">
                                 <input id="email_to" type="email" class="form-control @error('email_to') is-invalid @enderror" name="email_to" value="{{ old('email_to') }}" required autocomplete="email" autofocus>

@@ -78,6 +78,26 @@
         font-size: 20px;
     }
 
+    .action-btns{
+        /*position: absolute;*/
+        margin-top: 10px;
+        float:left;
+    }
+
+    .action-btns > .btn:hover {
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -o-transform: scale(1.1);
+    }
+    .action-btns > .btn {
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        -o-transform: scale(0.8);
+        -webkit-transition-duration: 0.5s;
+        -moz-transition-duration: 0.5s;
+        -o-transition-duration: 0.5s;
+    }
+
     .my_footer {
         position: absolute;
     }
@@ -88,7 +108,17 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="title">Liste des élèves de l'école</h1>
+        <div class="row float-left action-btns">
+            <a href="{{ route('personnels.liste_classes') }}" class="btn btn-primary a-btn-slide-text">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                <span><strong>Liste des classes</strong></span>            
+            </a>
+
+            <a href="{{ route('personnels.liste_parents') }}" class="btn btn-primary a-btn-slide-text">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                <span><strong>Liste des parents</strong></span>            
+            </a>
+        </div>
         <div class="container mb-3 mt-3">
             <!-- table table-dark table-hover | table table-striped table-bordered dt-responsive nowrap hover -->
             <table id="liste_élèves" class="table table-dark table-hover dt-responsive" cellspacing="0" style="width:100%">

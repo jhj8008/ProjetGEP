@@ -84,7 +84,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <h1 class="title">Fiches personnelles du personnel</h1>
-        @include('flash-message')
+        @if(Session::has('success'))
+            @include('flash-message')
+        @endif
         <div class="container mb-3 mt-3">
             <table id="liste_personnels" class="table table-dark table-hover dt-responsive" cellspacing="0" style="width:100%">
                 <thead>

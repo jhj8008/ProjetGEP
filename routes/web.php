@@ -29,6 +29,9 @@ Route::get('admin', function(){
 })->middleware('admin');
 
 Route::get('send-notification', 'NotificationController@sendOfferNotification')->name('send_notif');
+// ---------------------------------- IMAGE POST LINK FOR ARTICLE EDITOR -------------------------------
+// post link to upload images to website articles to visualize
+// images should located in the 'public/imgs' folder
 
 // Welcome page controllers
 Route::name('parents.')->group(function(){
@@ -165,6 +168,12 @@ Route::name('employés.')->group(function(){
 Route::name('personnels.')->group(function(){
     Route::get('espace_employe/espace_personnel', 'EspacePersonnelController@index')->name('espace_personnel');
     Route::get('espace_employe/espace_personnel/liste_élèves', 'GestionInfoElèveController@index')->name('liste_élèves');
+    Route::get('espace_employe/espace_personnel/listes_classes', 'GestionInfoElèveController@getListeClasses')->name('liste_classes');
+    Route::get('espace_employe/espace_personnel/liste_parents', 'GestionInfoElèveController@getListeParents')->name('liste_parents');
+    Route::get('espace_employ/espace_personnel/liste_parents/profile_parent/{id}', 'GestionInfoElèveController@getProfileParent')->name('profile_parent');
+    Route::get('espace_employ/espace_personnel/liste_parents/profile_parent/{id}/form_ajouter_élève', 'GestionInfoElèveController@pageFormAjouterElève')->name('form_ajouter_élève');
+    Route::post('form_ajouter_élève/ajouter_élève/{id}', 'GestionInfoElèveController@ajouterElève')->name('ajouter_élève');
+    Route::get('espace_employe/espace_personnel/liste_classes/print_liste_classe/{id}', 'GestionInfoElèveController@getListeClasse')->name('print_liste_classe');
     Route::get('espace_employe/espace_personnel/liste_élèves/profile_élève/{id}', 'GestionInfoElèveController@getProfileElève')->name('profile_élève');
     Route::get('espace_employe/espace_personnel/liste_élèves/profile_élève/{id}/supprimer_profile', 'GestionInfoElèveController@supprimerProfileElève')->name('supprimer_profile');
     Route::get('espace_employe/espace_personnel/liste_élèves/profile_élève/{id}/modifier_profile_form', 'GestionInfoElèveController@getFormModification')->name('form_modification_profile');

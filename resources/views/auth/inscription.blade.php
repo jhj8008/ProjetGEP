@@ -99,7 +99,6 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <h1>Page d'inscription des nouveaux élèves</h1>
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Inscription en ligne') }}</div>

@@ -6,7 +6,7 @@
 
 @section('scripts')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="htt^s://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -84,17 +84,25 @@
                 <thead>
                     <tr>
                         <th>Niveau</th>
-                        <th>Nom élève</th>
+                        <th>Classe</th>
+                        <th>Jour</th>
+                        <th>Semaine</th>
+                        <th>Mois</th>
+                        <th>Date</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($élèves as $élève)
+                    @foreach($classes as $classe)
                         <tr>
-                            <td class="align-middle"><strong style="color:#557A95;">{{ $élève->niveau_scolaire }}</strong></td>
-                            <td class="align-middle">{{ $élève->nom }}, {{ $élève->prénom }}</td>
+                            <td class="align-middle"><strong style="color:#557A95;">{{ explode('_',$classe->nom_classe)[0] }}</strong></td>
+                            <td class="align-middle">{{ $classe->nom_classe }}</td>
+                            <td class="align-middle">{{ Carbon\Carbon::parse($classe->emploi_temp->created_at)->day }}</td>
+                            <td class="align-middle">{{ Carbon\Carbon::parse($classe->emploi_temp->created_at)->weekOfMonth }}</td>
+                            <td class="align-middle">{{ Carbon\Carbon::parse($classe->emploi_temp->created_at)->month }}</td>
+                            <td class="align-middle">{{ Carbon\Carbon::parse($classe->emploi_temp->created_at)->format('d-m-Y') }}</td>
                             <td>
-                                <a href="{{ route('parents.emploi_temps', ['id' => $élève->id]) }}" class="btn btn-secondary">{{ __('Voir emploi') }}</a>
+                                <a href="{{ route('parents.emploi_temps', ['id' => $classe->id]) }}" class="btn btn-secondary">{{ __('Voir emploi') }}</a>
                             </td>
                         </tr>
                     @endforeach
@@ -102,7 +110,11 @@
                 <tfoot>
                     <tr>
                         <th>Niveau</th>
-                        <th>Nom élève</th>
+                        <th>Classe</th>
+                        <th>Jour</th>
+                        <th>Semaine</th>
+                        <th>Mois</th>
+                        <th>Date</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>

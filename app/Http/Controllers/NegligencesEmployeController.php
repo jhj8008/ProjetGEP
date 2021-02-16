@@ -70,13 +70,18 @@ class NegligencesEmployeController extends Controller
     }
 
     protected function validator(array $data){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractère(s)',
+        ];
         return Validator::make($data, [
             'date' => ['required', 'string', 'max:255'],
             'durée' => ['required', 'string'],
             'période' => ['required', 'string', 'max:10'],
             'raison' => ['required', 'string', 'max:255'],
             'type' => ['required', 'string', 'max:10'],
-        ]);
+        ], $messages);
     }
 
     protected function createNegligence(array $data, $enseignant_id){

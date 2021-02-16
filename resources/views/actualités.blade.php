@@ -1,7 +1,7 @@
 @extends(Auth::user() ? 'layouts.app' : 'layouts.admin')
 
 @section('page_title')
-    {{ __('Actuvalités') }}
+    {{ __('Actualités') }}
 @endsection
 
 @section('scripts')

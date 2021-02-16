@@ -92,10 +92,17 @@ class GestionEmploisDuTempsController extends Controller
     }
 
     protected function validator(array $data){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractères',
+            'integer' => ':attribute doit être un nombre entier'
+        ];
         return Validator::make($data, [
             'jour' => ['required', 'string'],
             'heure_début' => ['required', 'string'],
             'heure_fin' => ['required', 'string', 'after:heure_début'],
+            'salle' => ['required', 'string', 'max:255'],
             'description' => ['string', 'max:255'],
             'employe_id' => ['required','integer'],
             'matière_id' => ['required', 'integer'],
@@ -107,6 +114,7 @@ class GestionEmploisDuTempsController extends Controller
             'jour' => $data['jour'],
             'heure_début' => $data['heure_début'],
             'heure_fin' => $data['heure_fin'],
+            'salle' => $data['salle'],
             'description' => $data['description'],
             'employe_id' => $data['employe_id'],
             'matière_id' => $data['matière_id'],

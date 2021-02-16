@@ -19,6 +19,7 @@
             "lengthChange": false,
             "ordering": true,
             "pageLength": 5,
+            "searching": true,
             stateSave: true,
             "language": {
                 "search": "Chercher: ",
@@ -94,6 +95,7 @@
                     <tr>
                         <th>Id emploi</th>
                         <th>Classe</th>
+                        <th>Date</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -102,6 +104,7 @@
                         <tr>
                             <td class="align-middle"><strong style="color:#ffcbcb;">{{ $emploi->id }}</strong></td>
                             <td class="align-middle">{{ $emploi->classe->nom_classe }}</td>
+                            <td class="align-middle">{{ date('Y-m-d',strtotime($emploi->created_at)) }}</td>
                             <td>
                                 <a href="{{ route('personnels.emploi_du_temps', ['id' => $emploi->id]) }}" class="btn btn-outline-secondary" title="Voir ce profile">{{ __('Voir emploi du temps') }}</a>
                             </td>
@@ -113,6 +116,7 @@
                     <tr>
                         <th>Id emploi</th>
                         <th>Classe</th>
+                        <th>Date</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>

@@ -34,7 +34,7 @@ class Elèveparent extends Authenticatable
     protected $primarykey = 'id';
 
     public function elèves(){
-        return $this->hasMany('App\Elève');
+        return $this->hasMany('App\Elève', 'parent_id');
     }
 
     public function posts(){

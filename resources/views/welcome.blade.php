@@ -7,8 +7,10 @@
         <title>GEP</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito|Monoton|Raleway|Quicksand:200,600|Poppins|Lato" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nunito|Monoton|Raleway|Quicksand:200,600|Poppins|Lato|Rosario|Marvel" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <link rel="stylesheet" href="{{ URL::asset('css/new_style.css') }}" />
         <!-- Styles -->
         <link rel="icon" href="{{ URL::asset('imgs/school.png') }}" type="image/x-icon"/>
         <style>
@@ -69,8 +71,8 @@
 
             .title {
                 font-family: 'Monoton', sans-serif;
-                text-align: center;
-                font-size: 84px;
+                /*text-align: center;*/
+                /*font-size: 84px;*/
                 margin-top: 14%;
                 margin-bottom: 9%;
             }
@@ -174,6 +176,11 @@
                 color: red;
                 transition: all .5s;
             }
+
+            .mot-directeur {
+                font-family: 'Marvel';/*'Rosario';*/
+                font-size: 17px;
+            }
         </style>
     </head>
     <body>
@@ -194,9 +201,12 @@
 
             <div class="content">
                 <div class="title m-b-md" title="Gestion d'une école primaire">
-                    GEP
+                    <section class="p7">
+                        <a href="#">
+                            GEP
+                        </a>
+                    </section>
                 </div>
-
                 <div class="links">
                     <a class="my_link" href="{{ route('parents.forum') }}">Forum</a>
                     <a class="my_link" href="{{ route('parents.espace_élève') }}">Espace élève</a>
@@ -211,12 +221,18 @@
                 <div class="d-flex justify-content-center" style="width:70%;margin-top:5%;margin-left:13%;margin-right:10%">
                     <h3 class="display-4">Mot du directeur</h3>
                     <blockquote class="blockquote text-center">
-                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Urna condimentum mattis pellentesque id nibh tortor id aliquet. Euismod in pellentesque massa placerat. 
-                        Ante in nibh mauris cursus. Ac turpis egestas maecenas pharetra convallis. Placerat in egestas erat imperdiet sed euismod. 
-                        Non curabitur gravida arcu ac tortor dignissim convallis. Nunc vel risus commodo viverra. At tellus at urna condimentum mattis pellentesque id. 
-                        Tempor commodo ullamcorper a lacus vestibulum. Nibh tortor id aliquet lectus proin nibh. Tortor at auctor urna nunc id cursus metus aliquam eleifend.</p>
-                        <footer class="blockquote-footer">Directeur de GEP <cite title="Source Title" class="direct">Moustapha Alami</cite></footer>
+                        <p class="mb-0 mot-directeur">
+                        Depuis plus de 40ans d’existence, le Groupe Scolaire GEP, poursuit sa mission d’éducation en formant des élèves de la maternelle au baccalauréat selon 
+                        les programmes et méthodes du ministère de l’éducation nationale combinés aux meilleurs manuels et outils de la mission française. Ainsi, les élèves sont 
+                        préparés au préalable aux exigences des grandes écoles à l’échelle internationale.
+                        Le GEP se donne comme objectif d’apporter à chaque élève les outils de sa réussite scolaire, et de former des individus responsables et autonomes. Il a pour 
+                        ambition de développer l’ouverture de ses élèves sur le monde et de les accompagner dans leur développement culturel et sportif, et ce, à tous les niveaux de 
+                        leur scolarité.
+                        Depuis 1972, le Groupe Scolaire GEP a fourni des générations d’élèves « fiers d’être de GEP ». Être élève de GEP, c’est faire partie d’une communauté scolaire 
+                        dont on partage les valeurs de respect, de solidarité, d’ouverture, de responsabilité, de goût de l’effort et du travail bien fait.
+                        Un engagement réciproque fondé sur la confiance entre le Groupe et les familles, basé en priorité sur l’épanouissement personnel et la réussite scolaire de nos élèves.</p>
+                        <br>
+                        <footer class="blockquote-footer">Directeur de GEP <cite title="Source Title" class="direct">TAZI MOHAMMED</cite></footer>
                     </blockquote>
                 </div>
                 <div class="d-flex justify-content-right text-area" style="width:70%;margin-top:5%;margin-left:13%;margin-right:10%">
@@ -238,7 +254,7 @@
                         </p>
                     </div>
 
-                    <h3 class="display-4 soustitre">Les objectifs de la formation à l'école élémentaire</h3>
+                    <h3 class="display-4 soustitre">Des dispositifs au service de la réussite des élèves</h3>
                     <div class="text-sm-left">
                         <p class="mb-0">Priorité est donnée à l'école primaire qui permet de construire les apprentissages fondamentaux.</p>
                         <p class="mb-0">

@@ -83,6 +83,17 @@ class GestionFichePersonnelleController extends Controller
     }
 
     protected function validator(array $data){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractère(s)',
+            'email' => 'veuillez corriger votre email. Ex: xyz@abc.fr',
+            'min' => 'la taille min de :attribute doit avoir au moins :min caractère(s)',
+            'confirmed' => 'veuillez confirmer votre mot de passe',
+            'unique' => 'cet :attribute existe déjà, veuillez réessayer avec un autre',
+            'digits' => 'cet :attribute doit être un nombre composé de :digits chiffre(s)',
+            'exists' => 'cet :attribute est inexistant'
+        ];
         return Validator::make($data, [
             'nom' => ['required', 'string', 'max:255'],
             'prénom' => ['required', 'string', 'max:255'],
@@ -106,6 +117,6 @@ class GestionFichePersonnelleController extends Controller
             'date_entrée' => ['required', 'string'],
             'date_sortie' => ['required', 'string'],
             'situation_avant_enbauche' => ['required', 'string', 'max:255'],
-        ]);
+        ], $messages);
     }
 }

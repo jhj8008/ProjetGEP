@@ -36,11 +36,17 @@ class GestionNotesController extends Controller
     }
 
     protected function validator(array $data){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractère(s)',
+            'digits' => ':attribute doit être un nombre composé de :digits chiffres'
+        ];
         return Validator::make($data, [
-            'valeur' => ['required', 'string', 'regex:/^-?(?:\d+|\d*\.\d+)$/', 'max:7'],
-            'valeur2' => ['required', 'string', 'regex:/^-?(?:\d+|\d*\.\d+)$/', 'max:7'],
+            'valeur' => ['required', 'string', 'regex:/^-?(?:\d+|\d*\.\d+)$/', 'max:7', 'digits:2'],
+            'valeur2' => ['required', 'string', 'regex:/^-?(?:\d+|\d*\.\d+)$/', 'max:7', 'digits:2'],
             'remarque' => ['required','string', 'max:255'],
-        ]);
+        ], $messages);
     }
 
     protected function updateNote(array $data, $note_id){

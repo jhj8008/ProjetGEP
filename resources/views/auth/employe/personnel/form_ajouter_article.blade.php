@@ -9,10 +9,11 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-<script src="https://cdn.tiny.cloud/1/0nru1pz10o1pcl1fezowtmb5qawvlmsxp4odj1nn89xb5go1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<!--<script src="https://cdn.tiny.cloud/1/0nru1pz10o1pcl1fezowtmb5qawvlmsxp4odj1nn89xb5go1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>-->
 
 <script>
-  tinymce.init({
+  /*tinymce.init({
     selector: '#texte',
     menubar: true,
     plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
@@ -20,7 +21,12 @@
     toolbar_mode: 'floating',
     tinycomments_mode: 'embedded',
     tinycomments_author: 'Author name',
-  });
+  });*/
+</script>
+
+<script src="{{ asset('CKEDITOR/ckeditor.js') }}"></script>
+<script type="text/javascript">
+    CKEDITOR.replace('texte');
 </script>
 @endsection
 

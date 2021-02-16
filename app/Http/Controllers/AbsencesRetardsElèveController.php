@@ -86,6 +86,11 @@ class AbsencesRetardsElèveController extends Controller
     }
 
     protected function validator(array $data){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractères'
+        ];
         return Validator::make($data, [
             'type' => ['required', 'string', 'max:20'],
             'date' => ['required', 'string', 'max:20'],
@@ -93,7 +98,7 @@ class AbsencesRetardsElèveController extends Controller
             'période' => ['required', 'string', 'max:10'],
             'séance' => ['required', 'string', 'max:30'],
             'raison' => ['required', 'string', 'max:10'],
-        ]);
+        ], $messages);
     }
 
     protected function createNegligence(array $data, $elève_id){

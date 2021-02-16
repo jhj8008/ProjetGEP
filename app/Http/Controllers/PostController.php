@@ -12,9 +12,9 @@ class PostController extends Controller
 {
     public function getPosts(Request $request){
         if(isset($request->all()['last_post'])){
-            $posts = Post::distinct()->whereNotNull('employe_id')->where('id', '>', $request->all()['last_post'])->orderBy('created_at')->paginate(4);
+            $posts = Post::distinct()->where('id', '>', $request->all()['last_post'])->orderBy('created_at')->paginate(4);//->whereNotNull('employe_id')
         }else {
-            $posts = Post::distinct()->whereNotNull('employe_id')->orderBy('created_at')->paginate(4);
+            $posts = Post::distinct()->orderBy('created_at')->paginate(4);//->whereNotNull('employe_id')
         }
         $data = '';
         if($request->ajax()){
@@ -31,17 +31,26 @@ class PostController extends Controller
                     $days = 'Aujourd\'hui';
                 }
                 $post_url = route('employés.forum_thread', ['id' => $post->id]);
+                $name = "";
+                $post_count = 0;
+                if($post->employe_id == null){
+                    $name = "Parent ID " . $post->elèveparent->id;
+                    $post_count = count($post->elèveparent->posts);
+                }else {
+                    $name = $post->employe->nom . " " . $post->employe->prénom;
+                    $post_count = count($post->employe->posts);
+                }
                 $data .= '<div class="a_post container-fluid mt-100" id="' . $post->id . '">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <div class="media flex-wrap w-100 align-items-center"> <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="d-block ui-w-40 rounded-circle" alt="Image du profile">
-                                        <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">'  . $post->employe->nom . " " . $post->employe->prénom  . '</a>
+                                        <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">'  . $name  . '</a>
                                             <div class="text-muted small"> ' . $days . ' </div>
                                         </div>
                                         <div class="text-muted small ml-3">
-                                            <div><strong>' . count($post->employe->posts) . '</strong> posts</div>
+                                            <div><strong>' . $post_count . '</strong> posts</div>
                                         </div>
                                     </div>
                                 </div>
@@ -102,16 +111,26 @@ class PostController extends Controller
     }
 
     protected function validatorComment(array $data){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractère(s)',
+        ];
         return Validator::make($data, [
             'description' => ['required', 'string', 'max:255'],
-        ]);
+        ], $messages);
     }
 
     protected function validator(array $data){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractère(s)',
+        ];
         return Validator::make($data, [
             'titre' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
-        ]);
+        ], $messages);
     }
 
     protected function createPost(array $data, $employe_id, $parent_id){

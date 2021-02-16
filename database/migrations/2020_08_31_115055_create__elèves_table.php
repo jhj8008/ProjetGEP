@@ -21,6 +21,7 @@ class CreateElèvesTable extends Migration
             $table->date('date_de_naissance')->nullable();
             $table->string('niveau_scolaire');
             $table->unsignedInteger('parent_id');
+            $table->unsignedInteger('classe_id')->nullable();
         });
     }
 

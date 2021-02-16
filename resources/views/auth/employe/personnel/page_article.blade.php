@@ -1,8 +1,4 @@
-@if(Auth::guard('employe')->check())
-    @extends('layouts.admin')
-@else
-    @extends('layouts.app')
-@endif
+@extends(Auth::user() ? 'layouts.app' : 'layouts.admin')
 
 @section('page_title')
     {{ __('Page article') }}
@@ -40,17 +36,21 @@
         margin-top: 60px;
         font-family: 'Montserrat';
     }
+
+    .my_footer {
+        position: absolute;
+    }
 </style>
 @endsection
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        @if(strlen($article->image) > 0)
+        @if($article->image != 0)
             <img class="img-fluid" src="{{ URL::asset('imgs/' . $article->image) }}" width="600" height="150" alt="Responsive image">
         @endif
         <h1 class="title">{{ $article->titre }}</h1>
-        <div class="texte-body">
+        <div class="texte-body container">
             <h4 class="objet">{{ $article->objet }}</h4>
             <p class="author_date"><strong class="subtitle">Auteur:</strong> <span class="data">{{ $article->employe->nom }}, {{ $article->employe->prénom }}</span> <strong class="subtitle">Date:</strong> <span class="data">{{ $article->created_at }}</span></p>
             <div class="main_texte">

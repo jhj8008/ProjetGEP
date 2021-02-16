@@ -104,7 +104,14 @@ class GestionClassesMatièresController extends Controller
     }
 
     public function validatorMatière(array $data, $rules){
-        return Validator::make($data, $rules);
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractères',
+            'integer' => ':attribute doit être un nombre entier',
+            'unique' => ':attribute existe déjà, veuillez saisir un nouveau'
+        ];
+        return Validator::make($data, $rules, $messages);
     }
 
     public function updateMatière(array $data, $matière_id){
@@ -152,7 +159,14 @@ class GestionClassesMatièresController extends Controller
     }
 
     protected function validatorClasse(array $data, $rules){
-        return Validator::make($data, $rules);
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractères',
+            'unique' => ':attribute existe déjà, veuillez saisir un nouveau',
+            'digits' => ':attribute doit être nombre composé de :digits chiffres'
+        ];
+        return Validator::make($data, $rules, $messages);
     }
 
     public function modifierClasse(Request $request, $classe_id){

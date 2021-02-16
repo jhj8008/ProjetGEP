@@ -105,6 +105,11 @@ class InscriptionController extends Controller
         return redirect()->route('espace_élève');
      }
     protected function validator(array $data){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractères'
+        ];
         return Validator::make($data, [
             'nom' => ['required', 'string', 'max:255'],
             'prénom' => ['required', 'string', 'max:255'],
@@ -112,7 +117,7 @@ class InscriptionController extends Controller
             'date_de_naissance' => ['required', 'string', 'max:20'],
             'niveau_scolaire' => ['required', 'string', 'max:8'],
             'montant' => ['required', 'string']
-        ]);
+        ], $messages);
     }
 
     /**

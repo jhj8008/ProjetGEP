@@ -119,6 +119,17 @@ class GestionEnseignantsController extends Controller
     }
 
     protected function updateValidator(array $data, $rule, $enseignant_id){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractère(s)',
+            'email' => 'veuillez corriger votre email. Ex: xyz@abc.fr',
+            'min' => 'la taille min de :attribute doit avoir au moins :min caractère(s)',
+            'confirmed' => 'veuillez confirmer votre mot de passe',
+            'unique' => 'cet :attribute existe déjà, veuillez réessayer avec un autre',
+            'digits' => 'cet :attribute doit être un nombre composé de :digits chiffre(s)',
+            'exists' => 'cet :attribute est inexistant'
+        ];
         return Validator::make($data, [
             'nom' => ['required', 'string', 'max:255'],
             'prénom' => ['required', 'string', 'max:255'],
@@ -129,10 +140,21 @@ class GestionEnseignantsController extends Controller
             'password' => $rule, 
             'adresse' => ['required', 'string', 'max:255'], 
             'tel' => ['required', 'string', 'digits:10'],
-        ]);
+        ], $messages);
     }
 
     protected function validator(array $data, $rule, $email_rule){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractère(s)',
+            'email' => 'veuillez corriger votre email. Ex: xyz@abc.fr',
+            'min' => 'la taille min de :attribute doit avoir au moins :min caractère(s)',
+            'confirmed' => 'veuillez confirmer votre mot de passe',
+            'unique' => 'cet :attribute existe déjà, veuillez réessayer avec un autre',
+            'digits' => 'cet :attribute doit être un nombre composé de :digits chiffre(s)',
+            'exists' => 'cet :attribute est inexistant'
+        ];
         return Validator::make($data, [
             'nom' => ['required', 'string', 'max:255'],
             'prénom' => ['required', 'string', 'max:255'],
@@ -143,7 +165,7 @@ class GestionEnseignantsController extends Controller
             'password' => $rule, 
             'adresse' => ['required', 'string', 'max:255'], 
             'tel' => ['required', 'string', 'digits:10'],
-        ]);
+        ], $messages);
     }
 
     protected function createEnseignant(array $data){
@@ -151,7 +173,7 @@ class GestionEnseignantsController extends Controller
             'nom' => $data['nom'], 
             'prénom' => $data['prénom'], 
             'sexe' => $data['sexe'], 
-            'date_de_naissance' => $data['date_de_naissance'], 
+            'date_de_naissance' => date('Y-m-d',strtotime($data['date_de_naissance'])), 
             'fonction' => $data['fonction'], 
             'email' => $data['email'], 
             'password' => Hash::make($data['password']),
@@ -186,7 +208,7 @@ class GestionEnseignantsController extends Controller
         $enseignant->nom = $data['nom'];
         $enseignant->prénom = $data['prénom'];
         $enseignant->sexe = $data['sexe'];
-        $enseignant->date_de_naissance = $data['date_de_naissance'];
+        $enseignant->date_de_naissance = date('Y-m-d',strtotime($data['date_de_naissance']));
         $enseignant->fonction = $data['fonction'];
         $enseignant->email = $data['email'];
 

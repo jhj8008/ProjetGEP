@@ -80,6 +80,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="container mb-3 mt-3">
+            @error('failure')
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ $message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @enderror
             <table id="liste_élèves" class="table table-hover table-bordered dt-responsive nowrap hover" cellspacing="0" style="width:100%">
                 <thead>
                     <tr>

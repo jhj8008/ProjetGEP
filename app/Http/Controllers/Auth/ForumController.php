@@ -128,10 +128,15 @@ class ForumController extends Controller
     }
 
     protected function validator(array $data){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractères'
+        ];
         return Validator::make($data, [
             'titre' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
-        ]);
+        ], $messages);
     }
 
     protected function createPost(array $data, $employe_id, $parent_id){

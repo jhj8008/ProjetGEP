@@ -79,12 +79,18 @@ class GestionCahierTexteController extends Controller
     }
 
     protected function validator(array $data){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractères',
+            'date' => ':attribute doit être de type date'
+        ];
         return Validator::make($data, [
             'date' => ['required', 'date', 'date_format:Y-m-d'],
             'a_faire' => ['required', 'string', 'max:255'],
             'fait' => ['required', 'string', 'max:255'],
             'cours' => ['required', 'string', 'max:255'],
-        ]);
+        ], $messages);
     }
 
     public function updateTache(array $data, $tache_id){

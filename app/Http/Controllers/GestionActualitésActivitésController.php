@@ -55,12 +55,18 @@ class GestionActualitésActivitésController extends Controller
     }
 
     protected function validator(array $data){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractères',
+            'min' => ':attribute doit être une chaîne de caractères'
+        ];
         return Validator::make($data, [
             'type' => ['required', 'string', 'min:4'],
             'titre' => ['required', 'string'],
             'objet' => ['required', 'string', 'max:255'],
             'texte' => ['required', 'string', 'max:10000', 'min:10'],
-        ]);
+        ], $messages);
     }
 
     protected function createArticle(array $data){

@@ -20,6 +20,6 @@ class Emploi_temp extends Model
     }
 
     public function séances(){
-        return $this->belongsToMany('App\Séance', 'emploi_temp_séance');
+        return $this->belongsToMany('App\Séance', 'emploi_temp_séance')->orderBy('heure_début');
     }
 }

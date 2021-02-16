@@ -59,6 +59,14 @@ class GestionComptePersonnelController extends Controller
     }
 
     public function validator(array $data, $email_rule, $rule){
+        $messages = [
+            'required' => ':attribute est obligatoire dans ce formulaire',
+            'string' => ':attribute doit être une chaîne de caractères',
+            'max' => 'la taille max de :attribute ne doit pas dépasser :max caractères',
+            'email' => 'veuillez corriger votre email. Ex: xyz@abc.fr',
+            'min' => 'la taille min de :attribute doit avoir au moins :min caractères',
+            'unique' => 'cet :attribute existe déjà, veuillez réessayer avec un autre'
+        ];
         return Validator::make($data, [
             'nom' => ['required', 'string', 'max:255'],
             'prénom' => ['required', 'string', 'max:255'],
@@ -69,7 +77,7 @@ class GestionComptePersonnelController extends Controller
             'password' => $rule, 
             'adresse' => ['required', 'string', 'max:255'], 
             'tel' => ['required', 'string', 'digits:10'],
-        ]);
+        ], $messages);
     }
 
     protected function createPersonnel(array $data){
